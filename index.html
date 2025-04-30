@@ -122,7 +122,15 @@
   <h1>Encuesta sobre Rendimiento Académico y Técnicas de Estudio</h1>
   <h2>Universidad Nacional de Paraguay</h2>
   
-  <form id="academicSurvey" action="mailto:aldemirperaltadel@gmail.com" method="post" enctype="text/plain">
+  <!-- FORMULARIO ACTUALIZADO CON FORMSUBMIT -->
+  <form id="academicSurvey" action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
+    <!-- Configuración de FormSubmit -->
+    <input type="hidden" name="_subject" value="Nueva encuesta académica - Universidad Nacional de Paraguay">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://aldemir111.github.io/encuesta-academica/gracias.html">
+    <input type="text" name="_honey" style="display:none"> <!-- Anti-spam -->
+    <input type="hidden" name="_captcha" value="false">
+    
     <div class="intro">
       <p>Esta encuesta forma parte de un proyecto de investigación académica en Paraguay. Toda la información proporcionada será tratada de manera confidencial y anónima, utilizándose exclusivamente con fines de investigación.</p>
       <p><strong>Tiempo estimado:</strong> 10-15 minutos</p>
@@ -467,7 +475,6 @@
       </div>
     </div>
 
-    <input type="hidden" name="destinatario" value="aldemirperaltadel@gmail.com">
     <button type="submit">Enviar Encuesta</button>
   </form>
 
@@ -494,28 +501,24 @@
       let completed = 0;
       requiredInputs.forEach(input => {
         if (input.type === 'radio') {
-          // Para botones radio, verificamos si alguno del mismo nombre está seleccionado
           const name = input.name;
           const radioGroup = form.querySelectorAll(`input[name="${name}"]:checked`);
           if (radioGroup.length > 0) {
             completed++;
           }
         } else if (input.type === 'checkbox') {
-          // Para checkbox, verificamos si al menos uno con el mismo nombre está marcado
           const name = input.name;
           const checkboxes = form.querySelectorAll(`input[name="${name}"]:checked`);
           if (checkboxes.length > 0) {
             completed++;
           }
         } else {
-          // Para otros inputs, verificamos si tiene valor
           if (input.value.trim() !== '') {
             completed++;
           }
         }
       });
       
-      // Calculamos el porcentaje único para radio buttons y otros inputs
       const uniqueNames = new Set();
       requiredInputs.forEach(input => uniqueNames.add(input.name));
       const totalUniqueRequired = uniqueNames.size;
@@ -524,16 +527,45 @@
       progress.style.width = percent + '%';
     }
     
-    // Actualizar progreso cuando cambian los inputs
     form.addEventListener('change', updateProgress);
     form.addEventListener('input', updateProgress);
     
-    // Validación del formulario
+    // Validación antes de enviar
     form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('¡Gracias por completar la encuesta! Los datos serán enviados a aldemirperaltadel@gmail.com para su análisis.');
-      // En un entorno real, aquí se enviarían los datos al correo especificado
-      this.submit();
+      let isValid = true;
+      const requiredFields = form.querySelectorAll('[required]');
+      
+      requiredFields.forEach(field => {
+        if (field.type === 'radio' || field.type === 'checkbox') {
+          const name = field.name;
+          const checked = form.querySelectorAll(`input[name="${name}"]:checked`).length > 0;
+          if (!checked) {
+            isValid = false;
+            field.closest('.question').style.borderLeft = '3px solid red';
+          } else {
+            field.closest('.question').style.borderLeft = '';
+          }
+        } else if (!field.value.trim()) {
+          isValid = false;
+          field.style.borderColor = 'red';
+        } else {
+          field.style.borderColor = '';
+        }
+      });
+      
+      if (!isValid) {
+        e.preventDefault();
+        alert('Por favor completa todos los campos requeridos marcados con *.');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Mostrar mensaje de enviando
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
     });
   </script>
 </body>
