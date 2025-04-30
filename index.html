@@ -120,19 +120,19 @@
 <body>
 
   <h1>Encuesta sobre Rendimiento Académico y Técnicas de Estudio</h1>
-  <h2>Universidad Nacional de Paraguay</h2>
+  <h2>Facultad de Medicina - Universidad Nacional de Concepción</h2>
   
   <!-- FORMULARIO ACTUALIZADO CON FORMSUBMIT -->
   <form id="academicSurvey" action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
     <!-- Configuración de FormSubmit -->
-    <input type="hidden" name="_subject" value="Nueva encuesta académica - Universidad Nacional de Paraguay">
+    <input type="hidden" name="_subject" value="Nueva encuesta académica - Universidad Nacional de Concepción">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_next" value="https://aldemir111.github.io/encuesta-academica/gracias.html">
     <input type="text" name="_honey" style="display:none"> <!-- Anti-spam -->
     <input type="hidden" name="_captcha" value="false">
     
     <div class="intro">
-      <p>Esta encuesta forma parte de un proyecto de investigación académica en Paraguay. Toda la información proporcionada será tratada de manera confidencial y anónima, utilizándose exclusivamente con fines de investigación.</p>
+      <p>Esta encuesta forma parte de un proyecto de investigación académica para estudiantes de Medicina de la Universidad Nacional de Concepción. Toda la información proporcionada será tratada de manera confidencial y anónima, utilizándose exclusivamente con fines de investigación.</p>
       <p><strong>Tiempo estimado:</strong> 10-15 minutos</p>
     </div>
     
@@ -142,6 +142,11 @@
 
     <!-- SECCIÓN 1: DATOS DEMOGRÁFICOS -->
     <h2>Datos Generales</h2>
+    
+    <div class="question">
+      <strong class="required">Nombre completo (opcional)</strong>
+      <input type="text" name="nombre" placeholder="Puedes dejarlo en blanco si prefieres mantener el anonimato">
+    </div>
     
     <div class="question">
       <strong class="required">Edad</strong>
@@ -154,19 +159,6 @@
       <label><input type="radio" name="genero" value="femenino"> Femenino</label>
       <label><input type="radio" name="genero" value="otro"> Otro</label>
       <label><input type="radio" name="genero" value="prefiero-no-decir"> Prefiero no decir</label>
-    </div>
-    
-    <div class="question">
-      <strong class="required">Nivel educativo actual</strong>
-      <label><input type="radio" name="nivel" value="colegio" required> Colegio</label>
-      <label><input type="radio" name="nivel" value="universidad-pregrado"> Universidad (Licenciatura/Pregrado)</label>
-      <label><input type="radio" name="nivel" value="universidad-posgrado"> Universidad (Posgrado)</label>
-      <label><input type="radio" name="nivel" value="otro"> Otro</label>
-    </div>
-    
-    <div class="question">
-      <strong class="required">Carrera o programa de estudios</strong>
-      <input type="text" name="carrera" required>
     </div>
     
     <div class="question">
