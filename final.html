@@ -1,129 +1,244 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Sigue Adelante!</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-        }
-        
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            max-width: 800px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            color: #4a4a4a;
-            position: relative;
-        }
-        
-        .highlight {
-            color: #6e48aa;
-            font-weight: bold;
-        }
-        
-        p {
-            font-size: 20px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .countdown {
-            font-size: 32px;
-            font-weight: bold;
-            color: #e74c3c;
-            margin: 30px 0;
-        }
-        
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(to right, #6e48aa, #9d50bb);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 20px;
-        }
-        
-        .button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .decoration {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 0;
-        }
-        
-        .dec1 {
-            top: -50px;
-            left: -50px;
-            background: rgba(110, 72, 170, 0.1);
-        }
-        
-        .dec2 {
-            bottom: -70px;
-            right: -70px;
-            width: 200px;
-            height: 200px;
-            background: rgba(157, 80, 187, 0.1);
-        }
-        
-        .quote {
-            font-style: italic;
-            color: #666;
-            padding: 20px;
-            border-left: 5px solid #9d50bb;
-            background-color: rgba(110, 72, 170, 0.05);
-            margin: 30px 0;
-            text-align: left;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Felicitaciones Futuro Médico!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+    
+    :root {
+      --primary: #005b96;
+      --secondary: #00a1e0;
+      --accent: #ff6b6b;
+      --light: #f8f9fa;
+      --dark: #212529;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+    }
+    
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+      animation: confetti-fall 10s linear infinite;
+    }
+    
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin-bottom: 30px;
+    }
+    
+    .message-box {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      border-left: 5px solid var(--accent);
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .highlight {
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .emoji {
+      font-size: 1.5rem;
+    }
+    
+    .medical-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    
+    .medical-icon {
+      font-size: 2.5rem;
+      color: var(--secondary);
+    }
+    
+    .motivation-box {
+      background-color: var(--primary);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .motivation-text {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .message-box {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="decoration dec1"></div>
-        <div class="decoration dec2"></div>
-        
-        <h1>¡Continúa tu viaje hacia el <span class="highlight">éxito</span>!</h1>
-        
-        <p class="countdown">¡Solo 10 años más para alcanzar tu meta!</p>
-        
-        <p>El camino puede parecer largo, pero cada día de esfuerzo te acerca más a convertir tus sueños en realidad. No te rindas, porque el tiempo invertido en tu educación es una inversión en tu futuro.</p>
-        
-        <div class="quote">
-            "El éxito no es cuestión de suerte o talento, sino de perseverancia y determinación. Cada página que lees, cada problema que resuelves y cada obstáculo que superas te fortalece y te prepara para lograr cosas extraordinarias."
-        </div>
-        
-        <p>Recuerda que los mayores logros requieren tiempo y dedicación. ¡Tu graduación será la recompensa a todo tu esfuerzo y compromiso!</p>
-        
-        <a href="#" class="button">¡TÚ PUEDES LOGRARLO!</a>
+  <div class="confetti-container" id="confetti-container"></div>
+  
+  <div class="container">
+    <header>
+      <h1>¡Felicidades Futuro Médico!</h1>
+      <div class="subtitle">Tu camino en la medicina es inspirador</div>
+    </header>
+    
+    <div class="message-box">
+      <p>Estás a solo <span class="highlight">10 años</span> de terminar la carrera de medicina... <span class="emoji">😅</span></p>
+      <p>Perdón, quería decir...</p>
+      <p><span class="highlight">¡Fuerza! Tú puedes</span> <span class="emoji">💪</span></p>
+      <p>Ya superaste lo más difícil, pero aún te esperan:</p>
+      <ul style="text-align: left; padding-left: 20px;">
+        <li>5 años más de carrera</li>
+        <li>La CONAREM y la especialidad</li>
+        <li>La subespecialidad (opcional pero tentadora)</li>
+        <li>Y toda una vida de aprendizaje continuo</li>
+      </ul>
     </div>
+    
+    <div class="medical-icons">
+      <div class="medical-icon">🩺</div>
+      <div class="medical-icon">💊</div>
+      <div class="medical-icon">🏥</div>
+      <div class="medical-icon">🧪</div>
+      <div class="medical-icon">🧠</div>
+    </div>
+    
+    <div class="motivation-box">
+      <p class="motivation-text">Recuerda: Cada gran médico empezó donde tú estás ahora. ¡Persiste!</p>
+    </div>
+    
+    <footer>
+      <p>El mundo necesita más profesionales como tú. ¡No te rindas!</p>
+    </footer>
+  </div>
+
+  <script>
+    // Crear confeti
+    function createConfetti() {
+      const colors = ['#005b96', '#00a1e0', '#ff6b6b', '#4CAF50', '#FFC107', '#9C27B0'];
+      const container = document.getElementById('confetti-container');
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        
+        // Posición aleatoria
+        confetti.style.left = Math.random() * 100 + 'vw';
+        
+        // Tamaño aleatorio
+        const size = Math.random() * 10 + 5;
+        confetti.style.width = size + 'px';
+        confetti.style.height = size + 'px';
+        
+        // Color aleatorio
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Forma aleatoria (círculo o cuadrado)
+        if (Math.random() > 0.5) {
+          confetti.style.borderRadius = '50%';
+        }
+        
+        // Animación con duración aleatoria
+        confetti.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        
+        container.appendChild(confetti);
+      }
+    }
+    
+    // Llamar a la función cuando la página se carga
+    window.onload = createConfetti;
+    
+    // Agregar más confeti periódicamente
+    setInterval(() => {
+      const container = document.getElementById('confetti-container');
+      if (container.children.length < 150) {
+        createConfetti();
+      }
+    }, 3000);
+  </script>
 </body>
 </html>
