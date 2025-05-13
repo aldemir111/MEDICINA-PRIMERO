@@ -1219,6 +1219,11 @@
                 }
             });
         });
-    </script>
+   <script>
+    function enviarEncuesta(event) {
+      event.preventDefault(); // evita que el formulario se envíe y recargue la página
+      window.location.href = "final.html"; // redirige a la segunda página
+    }
+  </script>
 </body>
 </html>
