@@ -3,1223 +3,687 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta Estudiantes de Medicina - Primer Año (2025)</title>
+    <title>MÉTODOS DE ESTUDIOS Y RENDIMIENTO ACADÉMICO - MÉTODO ASSIST</title>
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --success-color: #2ecc71;
-        }
-        
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
-        
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
         }
-        
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        header p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
-        .form-section {
-            background-color: white;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
             border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        .form-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 22px;
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            margin-top: 40px;
+            font-size: 20px;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
         }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark-color);
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 15px;
         }
-        
-        .form-group p {
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-        
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border 0.3s;
-        }
-        
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        input[type="email"]:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .radio-group, .checkbox-group {
+        .options {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             gap: 10px;
+            justify-content: space-between;
         }
-        
-        .radio-option, .checkbox-option {
+        .option {
             display: flex;
             align-items: center;
         }
-        
-        .radio-option input, .checkbox-option input {
-            margin-right: 10px;
-        }
-        
-        .radio-option label, .checkbox-option label {
-            font-weight: normal;
-            margin-bottom: 0;
-        }
-        
-        .likert-scale {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .likert-option {
-            text-align: center;
-            font-size: 14px;
-        }
-        
-        .likert-option input {
+        .option input {
             margin-right: 5px;
         }
-        
-        .methods-grid {
-            display: grid;
-            grid-template-columns: 2fr repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+        .legend {
+            background-color: #eaf2f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
         }
-        
-        .methods-grid div {
-            padding: 8px;
-            text-align: center;
-            font-size: 14px;
+        .legend ul {
+            margin: 0;
+            padding-left: 20px;
         }
-        
-        .methods-grid .method-name {
-            text-align: left;
-            font-weight: 500;
+        .legend li {
+            margin-bottom: 5px;
         }
-        
-        .methods-grid-header {
-            font-weight: 600;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-        }
-        
-        .btn {
-            background-color: var(--primary-color);
+        .submit-btn {
+            background-color: #2c3e50;
             color: white;
-            border: none;
             padding: 12px 20px;
-            font-size: 16px;
+            border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .btn-block {
+            font-size: 16px;
             display: block;
-            width: 100%;
+            margin: 40px auto 0;
+            width: 200px;
         }
-        
-        .required:after {
-            content: " *";
-            color: var(--accent-color);
+        .submit-btn:hover {
+            background-color: #1a252f;
         }
-        
-        .other-specify {
-            margin-top: 10px;
-            display: none;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #777;
-            font-size: 14px;
-        }
-        
         @media (max-width: 768px) {
-            .likert-scale {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 15px;
             }
-            
-            .methods-grid {
-                grid-template-columns: 1fr;
+            .options {
+                flex-direction: column;
+                gap: 5px;
             }
-            
-            .methods-grid div {
-                text-align: left;
+            .submit-btn {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Estudiantes de Medicina – Primer Año (2025)</h1>
-            <p>Encuesta sobre métodos de estudio y rendimiento académico</p>
-        </header>
+        <h1>MÉTODOS DE ESTUDIOS Y RENDIMIENTO ACADÉMICO A ALUMNOS DE MEDICINA UNC PRIMER AÑO 2025. MÉTODO ASSIST</h1>
+        
+        <div class="legend">
+            <p><strong>Escala de valoración:</strong></p>
+            <ul>
+                <li><strong>1:</strong> Totalmente en desacuerdo</li>
+                <li><strong>2:</strong> En desacuerdo</li>
+                <li><strong>3:</strong> Neutral</li>
+                <li><strong>4:</strong> De acuerdo</li>
+                <li><strong>5:</strong> Totalmente de acuerdo</li>
+            </ul>
+            <p><em>Nota: Todas las preguntas son obligatorias.</em></p>
+        </div>
         
         <form action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="Nueva encuesta de estudiante de medicina">
-            <input type="hidden" name="_template" value="table">
+            <!-- Campo oculto para evitar spam -->
             <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://aldemir111.github.io/MEDICINA-PRIMERO/final.html">
-
-            <!-- Sección 1: Datos generales -->
-            <div class="form-section">
-                <h2>Sección 1: Datos generales</h2>
-                
-                <div class="form-group">
-                    <label for="edad" class="required">Edad</label>
-                    <input type="number" id="edad" name="edad" min="17" max="50" required>
-                </div>
-                
-                <div class="form-group">
-                    <p class="required">Sexo</p>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="sexo-masculino" name="sexo" value="Masculino" required>
-                            <label for="sexo-masculino">Masculino</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="sexo-femenino" name="sexo" value="Femenino">
-                            <label for="sexo-femenino">Femenino</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="sexo-otro" name="sexo" value="Otro">
-                            <label for="sexo-otro">Otro</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <p class="required">¿Eres estudiante regular de primer año de Medicina?</p>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="regular-si" name="estudiante_regular" value="Sí" required>
-                            <label for="regular-si">Sí</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="regular-no" name="estudiante_regular" value="No">
-                            <label for="regular-no">No</label>
-                        </div>
-                    </div>
+            <input type="hidden" name="_next" value="https://formsubmit.co/thanks">
+            <input type="hidden" name="_subject" value="Resultados Cuestionario - Medicina UNC 2025">
+                      <input type="hidden" name="_next" value="https://aldemir111.github.io/MEDICINA-PRIMERO/final.html">
+            
+            <h2>Enfoque Profundo (Deep Approach)</h2>
+            
+            <div class="question">
+                <p>1. Trato de relacionar lo que estudio con lo que ya sé.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p1" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p1" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p1" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p1" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p1" value="5"> 5 - Totalmente de acuerdo</label>
                 </div>
             </div>
             
-            <!-- Sección 2: Métodos de estudio más utilizados y frecuencia de uso -->
-            <div class="form-section">
-                <h2>Sección 2: Métodos de estudio más utilizados y frecuencia de uso</h2>
-                <p>¿Con qué frecuencia utilizas los siguientes métodos de estudio? (Escala: Nunca / Rara vez / A veces / Frecuentemente / Siempre)</p>
-                
-                <div class="form-group">
-                    <label>Lectura de libros de texto</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="lectura-nunca" name="lectura_libros" value="Nunca" required>
-                            <label for="lectura-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="lectura-rara" name="lectura_libros" value="Rara vez">
-                            <label for="lectura-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="lectura-veces" name="lectura_libros" value="A veces">
-                            <label for="lectura-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="lectura-frecuente" name="lectura_libros" value="Frecuentemente">
-                            <label for="lectura-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="lectura-siempre" name="lectura_libros" value="Siempre">
-                            <label for="lectura-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Realización de resúmenes o esquemas</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="resumenes-nunca" name="resumenes" value="Nunca" required>
-                            <label for="resumenes-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="resumenes-rara" name="resumenes" value="Rara vez">
-                            <label for="resumenes-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="resumenes-veces" name="resumenes" value="A veces">
-                            <label for="resumenes-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="resumenes-frecuente" name="resumenes" value="Frecuentemente">
-                            <label for="resumenes-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="resumenes-siempre" name="resumenes" value="Siempre">
-                            <label for="resumenes-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Subrayado de textos</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="subrayado-nunca" name="subrayado" value="Nunca" required>
-                            <label for="subrayado-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="subrayado-rara" name="subrayado" value="Rara vez">
-                            <label for="subrayado-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="subrayado-veces" name="subrayado" value="A veces">
-                            <label for="subrayado-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="subrayado-frecuente" name="subrayado" value="Frecuentemente">
-                            <label for="subrayado-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="subrayado-siempre" name="subrayado" value="Siempre">
-                            <label for="subrayado-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Elaboración de mapas conceptuales o mentales</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="mapas-nunca" name="mapas_conceptuales" value="Nunca" required>
-                            <label for="mapas-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mapas-rara" name="mapas_conceptuales" value="Rara vez">
-                            <label for="mapas-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mapas-veces" name="mapas_conceptuales" value="A veces">
-                            <label for="mapas-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mapas-frecuente" name="mapas_conceptuales" value="Frecuentemente">
-                            <label for="mapas-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mapas-siempre" name="mapas_conceptuales" value="Siempre">
-                            <label for="mapas-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Uso de tarjetas de memoria (flashcards)</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="flashcards-nunca" name="flashcards" value="Nunca" required>
-                            <label for="flashcards-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="flashcards-rara" name="flashcards" value="Rara vez">
-                            <label for="flashcards-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="flashcards-veces" name="flashcards" value="A veces">
-                            <label for="flashcards-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="flashcards-frecuente" name="flashcards" value="Frecuentemente">
-                            <label for="flashcards-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="flashcards-siempre" name="flashcards" value="Siempre">
-                            <label for="flashcards-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Participación en grupos de estudio</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="grupos-nunca" name="grupos_estudio" value="Nunca" required>
-                            <label for="grupos-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="grupos-rara" name="grupos_estudio" value="Rara vez">
-                            <label for="grupos-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="grupos-veces" name="grupos_estudio" value="A veces">
-                            <label for="grupos-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="grupos-frecuente" name="grupos_estudio" value="Frecuentemente">
-                            <label for="grupos-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="grupos-siempre" name="grupos_estudio" value="Siempre">
-                            <label for="grupos-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Visualización de videos educativos (YouTube, plataformas, etc.)</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="videos-nunca" name="videos_educativos" value="Nunca" required>
-                            <label for="videos-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="videos-rara" name="videos_educativos" value="Rara vez">
-                            <label for="videos-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="videos-veces" name="videos_educativos" value="A veces">
-                            <label for="videos-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="videos-frecuente" name="videos_educativos" value="Frecuentemente">
-                            <label for="videos-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="videos-siempre" name="videos_educativos" value="Siempre">
-                            <label for="videos-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Uso de aplicaciones móviles de estudio (Anki, Quizlet, etc.)</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="apps-nunca" name="apps_estudio" value="Nunca" required>
-                            <label for="apps-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="apps-rara" name="apps_estudio" value="Rara vez">
-                            <label for="apps-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="apps-veces" name="apps_estudio" value="A veces">
-                            <label for="apps-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="apps-frecuente" name="apps_estudio" value="Frecuentemente">
-                            <label for="apps-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="apps-siempre" name="apps_estudio" value="Siempre">
-                            <label for="apps-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Memorización repetitiva</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="memorizacion-nunca" name="memorizacion_repetitiva" value="Nunca" required>
-                            <label for="memorizacion-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="memorizacion-rara" name="memorizacion_repetitiva" value="Rara vez">
-                            <label for="memorizacion-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="memorizacion-veces" name="memorizacion_repetitiva" value="A veces">
-                            <label for="memorizacion-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="memorizacion-frecuente" name="memorizacion_repetitiva" value="Frecuentemente">
-                            <label for="memorizacion-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="memorizacion-siempre" name="memorizacion_repetitiva" value="Siempre">
-                            <label for="memorizacion-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Resolución de preguntas tipo examen</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="preguntas-nunca" name="preguntas_examen" value="Nunca" required>
-                            <label for="preguntas-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preguntas-rara" name="preguntas_examen" value="Rara vez">
-                            <label for="preguntas-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preguntas-veces" name="preguntas_examen" value="A veces">
-                            <label for="preguntas-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preguntas-frecuente" name="preguntas_examen" value="Frecuentemente">
-                            <label for="preguntas-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preguntas-siempre" name="preguntas_examen" value="Siempre">
-                            <label for="preguntas-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Asistencia a tutorías o clases de refuerzo</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="tutorias-nunca" name="tutorias" value="Nunca" required>
-                            <label for="tutorias-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="tutorias-rara" name="tutorias" value="Rara vez">
-                            <label for="tutorias-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="tutorias-veces" name="tutorias" value="A veces">
-                            <label for="tutorias-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="tutorias-frecuente" name="tutorias" value="Frecuentemente">
-                            <label for="tutorias-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="tutorias-siempre" name="tutorias" value="Siempre">
-                            <label for="tutorias-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Discusión de temas con compañeros fuera de clase</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="discusion-nunca" name="discusion_companeros" value="Nunca" required>
-                            <label for="discusion-nunca">Nunca</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="discusion-rara" name="discusion_companeros" value="Rara vez">
-                            <label for="discusion-rara">Rara vez</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="discusion-veces" name="discusion_companeros" value="A veces">
-                            <label for="discusion-veces">A veces</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="discusion-frecuente" name="discusion_companeros" value="Frecuentemente">
-                            <label for="discusion-frecuente">Frecuentemente</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="discusion-siempre" name="discusion_companeros" value="Siempre">
-                            <label for="discusion-siempre">Siempre</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Otros métodos (especificar)</label>
-                    <input type="text" id="otros-metodos" name="otros_metodos">
-                </div>
-                
-                <div class="form-group">
-                    <label for="principal_estrategia" class="required">¿Cuál de los métodos anteriores consideras que es tu principal estrategia de estudio? (Selecciona solo uno)</label>
-                    <select id="principal_estrategia" name="principal_estrategia" required>
-                        <option value="">-- Selecciona una opción --</option>
-                        <option value="Lectura de libros de texto">Lectura de libros de texto</option>
-                        <option value="Realización de resúmenes o esquemas">Realización de resúmenes o esquemas</option>
-                        <option value="Subrayado de textos">Subrayado de textos</option>
-                        <option value="Elaboración de mapas conceptuales o mentales">Elaboración de mapas conceptuales o mentales</option>
-                        <option value="Uso de tarjetas de memoria (flashcards)">Uso de tarjetas de memoria (flashcards)</option>
-                        <option value="Participación en grupos de estudio">Participación en grupos de estudio</option>
-                        <option value="Visualización de videos educativos">Visualización de videos educativos</option>
-                        <option value="Uso de aplicaciones móviles de estudio">Uso de aplicaciones móviles de estudio</option>
-                        <option value="Memorización repetitiva">Memorización repetitiva</option>
-                        <option value="Resolución de preguntas tipo examen">Resolución de preguntas tipo examen</option>
-                        <option value="Asistencia a tutorías o clases de refuerzo">Asistencia a tutorías o clases de refuerzo</option>
-                        <option value="Discusión de temas con compañeros fuera de clase">Discusión de temas con compañeros fuera de clase</option>
-                        <option value="Otros">Otros</option>
-                    </select>
-                    <div id="otra_estrategia_container" class="other-specify">
-                        <input type="text" id="otra_estrategia" name="otra_estrategia" placeholder="Especifica tu método principal">
-                    </div>
+            <div class="question">
+                <p>2. Busco entender las ideas principales en lugar de memorizar detalles.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p2" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p2" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p2" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p2" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p2" value="5"> 5 - Totalmente de acuerdo</label>
                 </div>
             </div>
             
-            <!-- Sección 3: Secuencia o orden de aplicación de los métodos de estudio -->
-            <div class="form-section">
-                <h2>Sección 3: Secuencia o orden de aplicación de los métodos de estudio</h2>
-                <p>Cuando estudias un nuevo tema o materia, ¿en qué orden sueles aplicar los siguientes métodos? (Numera del 1 al 5 los cinco primeros métodos que usas en orden; si usas menos, numera solo los que aplicas)(Adaptado para identificar el orden de estudio, basado en modelos de procesos de estudio validados como SPQ y literatura educativa)</p>
-                
-                <div class="form-group">
-                    <label for="orden_lectura">Lectura de libros de texto</label>
-                    <select id="orden_lectura" name="orden_lectura">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_resumenes">Realización de resúmenes o esquemas</label>
-                    <select id="orden_resumenes" name="orden_resumenes">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_preguntas">Resolución de preguntas tipo examen</label>
-                    <select id="orden_preguntas" name="orden_preguntas">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_subrayado">Subrayado de textos</label>
-                    <select id="orden_subrayado" name="orden_subrayado">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_videos">Visualización de videos educativos</label>
-                    <select id="orden_videos" name="orden_videos">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_mapas">Elaboración de mapas conceptuales o mentales</label>
-                    <select id="orden_mapas" name="orden_mapas">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_flashcards">Uso de tarjetas de memoria (flashcards)</label>
-                    <select id="orden_flashcards" name="orden_flashcards">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_grupos">Participación en grupos de estudio</label>
-                    <select id="orden_grupos" name="orden_grupos">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_apps">Uso de aplicaciones móviles de estudio</label>
-                    <select id="orden_apps" name="orden_apps">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_memorizacion">Memorización repetitiva</label>
-                    <select id="orden_memorizacion" name="orden_memorizacion">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_tutorias">Asistencia a tutorías o clases de refuerzo</label>
-                    <select id="orden_tutorias" name="orden_tutorias">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="orden_discusion">Discusión de temas con compañeros fuera de clase</label>
-                    <select id="orden_discusion" name="orden_discusion">
-                        <option value="">-- No aplica --</option>
-                        <option value="1">1 (Primero)</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Otros métodos (especificar)</label>
-                    <input type="text" id="otros-metodos-orden" name="otros_metodos_orden">
-                </div>
-                
-                <div class="form-group">
-                    <p>¿En qué momento del estudio usas cada uno de estos métodos? (Marca con una X en las columnas según corresponda)</p>
-                    <div class="methods-grid">
-                        <div class="methods-grid-header method-name">Método</div>
-                        <div class="methods-grid-header">Antes de empezar a estudiar</div>
-                        <div class="methods-grid-header">Durante la primera lectura</div>
-                        <div class="methods-grid-header">Al repasar</div>
-                        <div class="methods-grid-header">Antes del examen</div>
-                        
-                        <div class="method-name">Lectura de libros de texto</div>
-                        <div><input type="checkbox" name="lectura_antes" value="1"></div>
-                        <div><input type="checkbox" name="lectura_durante" value="1"></div>
-                        <div><input type="checkbox" name="lectura_repasar" value="1"></div>
-                        <div><input type="checkbox" name="lectura_examen" value="1"></div>
-                        
-                        <div class="method-name">Realización de resúmenes</div>
-                        <div><input type="checkbox" name="resumenes_antes" value="1"></div>
-                        <div><input type="checkbox" name="resumenes_durante" value="1"></div>
-                        <div><input type="checkbox" name="resumenes_repasar" value="1"></div>
-                        <div><input type="checkbox" name="resumenes_examen" value="1"></div>
-                        
-                        <div class="method-name">Resolución de preguntas examen</div>
-                        <div><input type="checkbox" name="preguntas_antes" value="1"></div>
-                        <div><input type="checkbox" name="preguntas_durante" value="1"></div>
-                        <div><input type="checkbox" name="preguntas_repasar" value="1"></div>
-                        <div><input type="checkbox" name="preguntas_examen" value="1"></div>
-                        
-                        <div class="method-name">Visualización de videos</div>
-                        <div><input type="checkbox" name="videos_antes" value="1"></div>
-                        <div><input type="checkbox" name="videos_durante" value="1"></div>
-                        <div><input type="checkbox" name="videos_repasar" value="1"></div>
-                        <div><input type="checkbox" name="videos_examen" value="1"></div>
-                        
-                        <div class="method-name">Participación en grupos de estudio</div>
-                        <div><input type="checkbox" name="grupos_antes" value="1"></div>
-                        <div><input type="checkbox" name="grupos_durante" value="1"></div>
-                        <div><input type="checkbox" name="grupos_repasar" value="1"></div>
-                        <div><input type="checkbox" name="grupos_examen" value="1"></div>
-                        
-                        <div class="method-name">Otros (especificar)</div>
-                        <div><input type="checkbox" name="otros_antes" value="1"></div>
-                        <div><input type="checkbox" name="otros_durante" value="1"></div>
-                        <div><input type="checkbox" name="otros_repasar" value="1"></div>
-                        <div><input type="checkbox" name="otros_examen" value="1"></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Especificar otros métodos</label>
-                        <input type="text" id="otros-metodos-momento" name="otros_metodos_momento">
-                    </div>
+            <div class="question">
+                <p>3. Me esfuerzo por comprender completamente el material de estudio.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p3" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p3" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p3" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p3" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p3" value="5"> 5 - Totalmente de acuerdo</label>
                 </div>
             </div>
             
-            <!-- Sección 4: Percepción de efectividad de los métodos de estudio -->
-            <div class="form-section">
-                <h2>Sección 4: Percepción de efectividad de los métodos de estudio</h2>
-                <p>Indica tu grado de acuerdo con las siguientes afirmaciones: (Escala Likert: Muy en desacuerdo / En desacuerdo / Ni de acuerdo ni en desacuerdo / De acuerdo / Muy de acuerdo)</p>
-                
-                <div class="form-group">
-                    <label>Mis métodos de estudio me ayudan a comprender mejor los temas.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="comprension-muy-desacuerdo" name="comprension" value="Muy en desacuerdo" required>
-                            <label for="comprension-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="comprension-desacuerdo" name="comprension" value="En desacuerdo">
-                            <label for="comprension-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="comprension-neutral" name="comprension" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="comprension-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="comprension-acuerdo" name="comprension" value="De acuerdo">
-                            <label for="comprension-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="comprension-muy-acuerdo" name="comprension" value="Muy de acuerdo">
-                            <label for="comprension-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Mis estrategias de estudio me permiten recordar la información a largo plazo.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="recuerdo-muy-desacuerdo" name="recuerdo" value="Muy en desacuerdo" required>
-                            <label for="recuerdo-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="recuerdo-desacuerdo" name="recuerdo" value="En desacuerdo">
-                            <label for="recuerdo-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="recuerdo-neutral" name="recuerdo" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="recuerdo-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="recuerdo-acuerdo" name="recuerdo" value="De acuerdo">
-                            <label for="recuerdo-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="recuerdo-muy-acuerdo" name="recuerdo" value="Muy de acuerdo">
-                            <label for="recuerdo-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Me siento preparado/a para los exámenes gracias a mis métodos de estudio.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="preparacion-muy-desacuerdo" name="preparacion" value="Muy en desacuerdo" required>
-                            <label for="preparacion-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preparacion-desacuerdo" name="preparacion" value="En desacuerdo">
-                            <label for="preparacion-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preparacion-neutral" name="preparacion" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="preparacion-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preparacion-acuerdo" name="preparacion" value="De acuerdo">
-                            <label for="preparacion-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="preparacion-muy-acuerdo" name="preparacion" value="Muy de acuerdo">
-                            <label for="preparacion-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Siento que podría mejorar mis métodos de estudio.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="mejora-muy-desacuerdo" name="mejora" value="Muy en desacuerdo" required>
-                            <label for="mejora-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mejora-desacuerdo" name="mejora" value="En desacuerdo">
-                            <label for="mejora-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mejora-neutral" name="mejora" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="mejora-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mejora-acuerdo" name="mejora" value="De acuerdo">
-                            <label for="mejora-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="mejora-muy-acuerdo" name="mejora" value="Muy de acuerdo">
-                            <label for="mejora-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Considero que mi forma de estudiar es eficiente.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="eficiencia-muy-desacuerdo" name="eficiencia" value="Muy en desacuerdo" required>
-                            <label for="eficiencia-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="eficiencia-desacuerdo" name="eficiencia" value="En desacuerdo">
-                            <label for="eficiencia-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="eficiencia-neutral" name="eficiencia" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="eficiencia-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="eficiencia-acuerdo" name="eficiencia" value="De acuerdo">
-                            <label for="eficiencia-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="eficiencia-muy-acuerdo" name="eficiencia" value="Muy de acuerdo">
-                            <label for="eficiencia-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Me gustaría recibir capacitación sobre técnicas de estudio.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="capacitacion-muy-desacuerdo" name="capacitacion" value="Muy en desacuerdo" required>
-                            <label for="capacitacion-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="capacitacion-desacuerdo" name="capacitacion" value="En desacuerdo">
-                            <label for="capacitacion-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="capacitacion-neutral" name="capacitacion" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="capacitacion-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="capacitacion-acuerdo" name="capacitacion" value="De acuerdo">
-                            <label for="capacitacion-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="capacitacion-muy-acuerdo" name="capacitacion" value="Muy de acuerdo">
-                            <label for="capacitacion-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Estoy satisfecho/a con mis resultados académicos usando mis métodos de estudio.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="satisfaccion-muy-desacuerdo" name="satisfaccion" value="Muy en desacuerdo" required>
-                            <label for="satisfaccion-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="satisfaccion-desacuerdo" name="satisfaccion" value="En desacuerdo">
-                            <label for="satisfaccion-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="satisfaccion-neutral" name="satisfaccion" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="satisfaccion-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="satisfaccion-acuerdo" name="satisfaccion" value="De acuerdo">
-                            <label for="satisfaccion-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="satisfaccion-muy-acuerdo" name="satisfaccion" value="Muy de acuerdo">
-                            <label for="satisfaccion-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Me siento motivado/a al estudiar con mis métodos actuales.</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="motivacion-muy-desacuerdo" name="motivacion" value="Muy en desacuerdo" required>
-                            <label for="motivacion-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="motivacion-desacuerdo" name="motivacion" value="En desacuerdo">
-                            <label for="motivacion-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="motivacion-neutral" name="motivacion" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="motivacion-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="motivacion-acuerdo" name="motivacion" value="De acuerdo">
-                            <label for="motivacion-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="motivacion-muy-acuerdo" name="motivacion" value="Muy de acuerdo">
-                            <label for="motivacion-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
+            <div class="question">
+                <p>4. Intento encontrar ejemplos que ilustren los conceptos.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p4" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p4" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p4" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p4" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p4" value="5"> 5 - Totalmente de acuerdo</label>
                 </div>
             </div>
             
-            <!-- Sección 5: Relación entre métodos de estudio y rendimiento académico -->
-            <div class="form-section">
-                <h2>Sección 5: Relación entre métodos de estudio y rendimiento académico</h2>
-                
-                <div class="form-group">
-                    <p class="required">¿Cuál fue tu promedio de calificaciones en el último semestre? (Escala local de 1 a 5, donde 1 es la nota mínima y 5 la máxima)</p>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="promedio-1" name="promedio" value="1.0 – 1.9" required>
-                            <label for="promedio-1">1.0 – 1.9</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="promedio-2" name="promedio" value="2.0 – 2.9">
-                            <label for="promedio-2">2.0 – 2.9</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="promedio-3" name="promedio" value="3.0 – 3.9">
-                            <label for="promedio-3">3.0 – 3.9</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="promedio-4" name="promedio" value="4.0 – 5.0">
-                            <label for="promedio-4">4.0 – 5.0</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <p class="required">¿Cuántas horas al día dedicas, en promedio, al estudio fuera del aula?</p>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="horas-1" name="horas_estudio" value="Menos de 1 hora" required>
-                            <label for="horas-1">Menos de 1 hora</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="horas-2" name="horas_estudio" value="1-2 horas">
-                            <label for="horas-2">1-2 horas</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="horas-3" name="horas_estudio" value="2-4 horas">
-                            <label for="horas-3">2-4 horas</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="horas-4" name="horas_estudio" value="Más de 4 horas">
-                            <label for="horas-4">Más de 4 horas</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>¿Consideras que existe una relación directa entre tus métodos de estudio y tu rendimiento académico? (Escala Likert: Muy en desacuerdo / En desacuerdo / Ni de acuerdo ni en desacuerdo / De acuerdo / Muy de acuerdo)</label>
-                    <div class="likert-scale">
-                        <div class="likert-option">
-                            <input type="radio" id="relacion-muy-desacuerdo" name="relacion" value="Muy en desacuerdo" required>
-                            <label for="relacion-muy-desacuerdo">Muy en desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="relacion-desacuerdo" name="relacion" value="En desacuerdo">
-                            <label for="relacion-desacuerdo">En desacuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="relacion-neutral" name="relacion" value="Ni de acuerdo ni en desacuerdo">
-                            <label for="relacion-neutral">Neutral</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="relacion-acuerdo" name="relacion" value="De acuerdo">
-                            <label for="relacion-acuerdo">De acuerdo</label>
-                        </div>
-                        <div class="likert-option">
-                            <input type="radio" id="relacion-muy-acuerdo" name="relacion" value="Muy de acuerdo">
-                            <label for="relacion-muy-acuerdo">Muy de acuerdo</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <p class="required">¿Has cambiado tus métodos de estudio en respuesta a tus resultados académicos?</p>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="cambio-si" name="cambio_metodos" value="Sí" required>
-                            <label for="cambio-si">Sí</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="cambio-no" name="cambio_metodos" value="No">
-                            <label for="cambio-no">No</label>
-                        </div>
-                    </div>
-                    <div id="cambios-container" class="other-specify">
-                        <label for="cambios_realizados">Si la respuesta es sí, ¿qué cambios realizaste?</label>
-                        <textarea id="cambios_realizados" name="cambios_realizados"></textarea>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="dificultades">¿Qué dificultades encuentras al aplicar tus métodos de estudio?</label>
-                    <textarea id="dificultades" name="dificultades"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <p>¿Qué factores consideras que más influyen en tu rendimiento académico? (Marca todas las que apliquen)</p>
-                    <div class="checkbox-group">
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="factor-metodos" name="factores[]" value="Métodos de estudio">
-                            <label for="factor-metodos">Métodos de estudio</label>
-                        </div>
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="factor-motivacion" name="factores[]" value="Motivación personal">
-                            <label for="factor-motivacion">Motivación personal</label>
-                        </div>
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="factor-familia" name="factores[]" value="Apoyo familiar">
-                            <label for="factor-familia">Apoyo familiar</label>
-                        </div>
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="factor-docentes" name="factores[]" value="Docentes">
-                            <label for="factor-docentes">Docentes</label>
-                        </div>
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="factor-recursos" name="factores[]" value="Recursos académicos">
-                            <label for="factor-recursos">Recursos académicos</label>
-                        </div>
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="factor-otros" name="factores[]" value="Otros">
-                            <label for="factor-otros">Otros</label>
-                        </div>
-                    </div>
-                    <div id="otros-factores-container" class="other-specify">
-                        <input type="text" id="otros_factores" name="otros_factores" placeholder="Especifica otros factores">
-                    </div>
+            <div class="question">
+                <p>5. Me gusta pensar en cómo se relacionan las ideas entre sí.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p5" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p5" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p5" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p5" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p5" value="5"> 5 - Totalmente de acuerdo</label>
                 </div>
             </div>
             
-            <div class="form-section">
-                <button type="submit" class="btn btn-block">Enviar Encuesta</button>
+            <div class="question">
+                <p>6. Intento comprender el significado detrás de los hechos.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p6" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p6" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p6" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p6" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p6" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
             </div>
+            
+            <div class="question">
+                <p>7. Me esfuerzo por entender el material, no solo aprenderlo de memoria.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p7" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p7" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p7" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p7" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p7" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>8. Prefiero estudiar temas que me interesan y me motivan.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p8" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p8" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p8" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p8" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p8" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>9. Me gusta discutir los temas para aclarar mis ideas.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p9" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p9" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p9" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p9" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p9" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>10. Intento aplicar lo que aprendo a situaciones reales.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p10" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p10" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p10" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p10" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p10" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>11. Busco evidencias para apoyar mis ideas.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p11" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p11" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p11" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p11" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p11" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>12. Me esfuerzo por entender los argumentos detrás de las ideas.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p12" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p12" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p12" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p12" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p12" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>13. Prefiero estudiar con interés y curiosidad genuina.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p13" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p13" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p13" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p13" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p13" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>14. Trato de integrar diferentes ideas para formar una visión coherente.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p14" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p14" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p14" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p14" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p14" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>15. Me esfuerzo en analizar críticamente la información.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p15" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p15" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p15" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p15" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p15" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>16. Me gusta aprender cosas nuevas que me desafían intelectualmente.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p16" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p16" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p16" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p16" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p16" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <h2>Enfoque Estratégico (Strategic Approach)</h2>
+            
+            <div class="question">
+                <p>17. Organizo mi tiempo para estudiar de forma eficiente.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p17" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p17" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p17" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p17" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p17" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>18. Preparo los exámenes con anticipación para obtener buenas calificaciones.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p18" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p18" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p18" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p18" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p18" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>19. Me concentro en los aspectos que sé que serán evaluados.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p19" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p19" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p19" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p19" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p19" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>20. Busco maneras de mejorar mi rendimiento académico.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p20" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p20" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p20" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p20" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p20" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>21. Estudio más cuando sé que hay exámenes importantes.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p21" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p21" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p21" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p21" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p21" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>22. Hago esquemas o resúmenes para organizar el material.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p22" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p22" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p22" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p22" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p22" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>23. Me esfuerzo por obtener las mejores calificaciones posibles.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p23" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p23" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p23" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p23" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p23" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>24. Planifico mis sesiones de estudio para cubrir todo el material.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p24" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p24" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p24" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p24" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p24" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>25. Uso técnicas de estudio que me han funcionado antes.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p25" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p25" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p25" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p25" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p25" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>26. Me esfuerzo en entender lo que se espera en los exámenes.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p26" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p26" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p26" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p26" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p26" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>27. Me fijo metas claras para mis estudios.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p27" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p27" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p27" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p27" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p27" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>28. Reviso el material varias veces para asegurarme de entenderlo.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p28" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p28" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p28" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p28" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p28" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>29. Me adapto a los requisitos del curso para maximizar mis resultados.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p29" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p29" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p29" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p29" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p29" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>30. Busco formas de estudiar que me ayuden a rendir mejor.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p30" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p30" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p30" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p30" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p30" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>31. Me esfuerzo por mantener un buen equilibrio entre estudio y descanso.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p31" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p31" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p31" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p31" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p31" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>32. Utilizo el tiempo libre para repasar y consolidar lo aprendido.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p32" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p32" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p32" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p32" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p32" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>33. Me preparo para los exámenes practicando con preguntas similares.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p33" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p33" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p33" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p33" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p33" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>34. Me esfuerzo por mantenerme motivado para estudiar.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p34" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p34" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p34" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p34" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p34" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>35. Ajusto mis métodos de estudio según los resultados que obtengo.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p35" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p35" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p35" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p35" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p35" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>36. Me esfuerzo por aprender de mis errores para mejorar.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p36" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p36" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p36" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p36" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p36" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <h2>Enfoque Superficial (Surface Approach)</h2>
+            
+            <div class="question">
+                <p>37. Estudio solo para pasar los exámenes.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p37" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p37" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p37" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p37" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p37" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>38. Memorizo hechos sin preocuparme por entenderlos.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p38" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p38" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p38" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p38" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p38" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>39. No me preocupo por entender el material, solo por aprender lo justo.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p39" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p39" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p39" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p39" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p39" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>41. A veces estudio sin prestar mucha atención.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p41" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p41" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p41" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p41" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p41" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>42. Me siento abrumado/a por la cantidad de material y solo intento memorizar lo básico.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p42" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p42" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p42" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p42" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p42" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>43. No me interesa mucho el tema, solo quiero aprobar.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p43" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p43" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p43" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p43" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p43" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>44. Me cuesta relacionar las ideas entre sí.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p44" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p44" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p44" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p44" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p44" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>45. Prefiero estudiar lo que es fácil para mí.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p45" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p45" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p45" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p45" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p45" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>46. A veces me salto partes del material que no entiendo bien.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p46" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p46" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p46" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p46" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p46" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>47. Estudio solo lo que creo que va a salir en el examen.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p47" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p47" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p47" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p47" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p47" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>49. A veces evito estudiar temas difíciles.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p49" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p49" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p49" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p49" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p49" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>50. No me esfuerzo por entender los conceptos complejos.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p50" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p50" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p50" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p50" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p50" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>51. Me siento presionado/a y estudio solo para evitar reprobar.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p51" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p51" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p51" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p51" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p51" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>52. No me gusta estudiar, pero lo hago para pasar.</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="p52" value="1" required> 1 - Totalmente en desacuerdo</label>
+                    <label class="option"><input type="radio" name="p52" value="2"> 2 - En desacuerdo</label>
+                    <label class="option"><input type="radio" name="p52" value="3"> 3 - Neutral</label>
+                    <label class="option"><input type="radio" name="p52" value="4"> 4 - De acuerdo</label>
+                    <label class="option"><input type="radio" name="p52" value="5"> 5 - Totalmente de acuerdo</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Enviar Respuestas</button>
         </form>
-        
-        <footer>
-            <p>Encuesta anónima - Todos los datos serán tratados con confidencialidad</p>
-            <p>© 2025 - Facultad de Medicina</p>
-        </footer>
     </div>
-
-    <script>
-        // Mostrar campo "Otros" cuando se selecciona esa opción
-        document.getElementById('principal_estrategia').addEventListener('change', function() {
-            const otrosContainer = document.getElementById('otra_estrategia_container');
-            if (this.value === 'Otros') {
-                otrosContainer.style.display = 'block';
-            } else {
-                otrosContainer.style.display = 'none';
-            }
-        });
-        
-        document.getElementById('factor-otros').addEventListener('change', function() {
-            const otrosContainer = document.getElementById('otros-factores-container');
-            if (this.checked) {
-                otrosContainer.style.display = 'block';
-            } else {
-                otrosContainer.style.display = 'none';
-            }
-        });
-        
-        document.querySelectorAll('input[name="cambio_metodos"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const cambiosContainer = document.getElementById('cambios-container');
-                if (this.value === 'Sí' && this.checked) {
-                    cambiosContainer.style.display = 'block';
-                } else {
-                    cambiosContainer.style.display = 'none';
-                }
-            });
-        });
-   <script>
 </body>
 </html>
