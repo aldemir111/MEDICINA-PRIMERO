@@ -3,486 +3,657 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta sobre Métodos de Estudio - Obligatoria</title>
+    <title>Herramientas de Estudio - Medicina</title>
     <style>
+        /* Estilos generales */
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
             color: #333;
         }
+        
         h1 {
-            color: #2c3e50;
+            color: #00468b;
             text-align: center;
             margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-        h2 {
-            color: #3498db;
-            margin-top: 40px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+        
+        /* Pestañas */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #b3d7ff;
         }
+        
+        .tab {
+            padding: 12px 20px;
+            background-color: #e6f3ff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #00468b;
+            border-radius: 6px 6px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            background-color: #d4e6ff;
+        }
+        
+        .tab.active {
+            background-color: #00468b;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Estilos para la encuesta */
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
         .form-group {
             margin-bottom: 25px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        label {
+        
+        .form-group label {
             display: block;
+            font-weight: 600;
             margin-bottom: 10px;
-            font-weight: bold;
+            color: #004080;
         }
-        .required:after {
-            content: " *";
-            color: red;
-        }
-        input[type="text"], 
-        input[type="email"],
-        textarea, 
-        select {
+        
+        .form-group input[type="text"], 
+        .form-group input[type="number"] {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #cce0ff;
             border-radius: 4px;
             font-size: 16px;
-            margin-top: 5px;
         }
-        textarea {
-            height: 100px;
-            resize: vertical;
+        
+        .form-group input[type="number"] {
+            width: 100px;
         }
-        .radio-group, 
-        .checkbox-group {
-            margin-top: 8px;
+        
+        .radio-group {
+            margin-top: 10px;
         }
-        .radio-option, 
-        .checkbox-option {
+        
+        .radio-option {
+            display: block;
             margin-bottom: 10px;
+            padding: 8px 12px;
+            background-color: #f0f7ff;
+            border: 1px solid #cce0ff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-        input[type="radio"],
-        input[type="checkbox"] {
+        
+        .radio-option:hover {
+            background-color: #e0f0ff;
+        }
+        
+        .radio-option input {
             margin-right: 10px;
         }
-        button {
-            background-color: #3498db;
+        
+        .sub-question {
+            margin-left: 30px;
+            margin-top: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #b3d7ff;
+        }
+        
+        .required-star {
+            color: #d32f2f;
+            margin-left: 5px;
+        }
+        
+        .section-description {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        button[type="submit"] {
+            background-color: #00468b;
             color: white;
             border: none;
             padding: 12px 20px;
-            font-size: 16px;
             border-radius: 4px;
             cursor: pointer;
-            display: block;
-            margin: 30px auto;
-            width: 200px;
+            font-size: 16px;
             transition: background-color 0.3s;
+            display: block;
+            margin: 30px auto 10px auto;
+            width: 200px;
+            font-weight: 500;
         }
-        button:hover {
-            background-color: #2980b9;
+        
+        button[type="submit"]:hover {
+            background-color: #003366;
         }
-        .error {
-            color: #e74c3c;
+        
+        .error-message {
+            color: #d32f2f;
             font-size: 14px;
             margin-top: 5px;
             display: none;
         }
+        
         .success-message {
-            text-align: center;
-            color: #27ae60;
-            font-size: 18px;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #e8f8f5;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
             border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #2e7d32;
+            text-align: center;
             display: none;
         }
-        .card {
+        
+        /* Estilos para el creador de flujo */
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .options-panel {
+            flex: 1;
             background-color: white;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .conditional-input {
-            margin-top: 15px;
-            margin-left: 30px;
-            display: none;
+        
+        .flow-panel {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
-        #loading {
-            display: none;
+        
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: #f0f7ff;
+            border: 1px solid #cce0ff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #004080;
+            font-weight: 500;
+        }
+        
+        .option-btn:hover {
+            background-color: #e0f0ff;
+            border-color: #99c2ff;
+        }
+        
+        .option-btn:active {
+            background-color: #d4e6ff;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            background-color: #e6f3ff;
+            border: 1px solid #b3d7ff;
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .step-number {
+            background-color: #00468b;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .step-text {
+            flex-grow: 1;
+            color: #004080;
+            font-weight: 500;
+        }
+        
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .arrow {
             text-align: center;
-            margin: 20px 0;
+            color: #00468b;
+            font-weight: bold;
+            margin: 4px 0;
+        }
+        
+        .message {
+            font-style: italic;
+            color: #555;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .action-btns {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .flow-btn {
+            background-color: #00468b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 0 5px;
+            font-weight: 500;
+        }
+        
+        .flow-btn:hover {
+            background-color: #003366;
+        }
+        
+        .reset {
+            background-color: #d32f2f;
+        }
+        
+        .reset:hover {
+            background-color: #b71c1c;
+        }
+        
+        .custom-option-container {
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+        
+        #customOptionInput {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Encuesta sobre Métodos de Estudio</h1>
+    <h1>Herramientas de Estudio para Medicina</h1>
     
-    <div class="card">
-        <p>Esta encuesta tiene como objetivo comprender la efectividad de diferentes métodos de estudio y su relación con el rendimiento académico. Todos los campos son obligatorios.</p>
+    <div class="tabs">
+        <button class="tab active" onclick="openTab('encuesta')">Encuesta de Métodos</button>
+        <button class="tab" onclick="openTab('flujo')">Creador de Flujo de Estudio</button>
     </div>
-
-    <form id="studyMethodsForm">
-        <div class="form-group">
-            <label for="nombre" class="required">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" required>
-            <div id="nombre-error" class="error">Por favor ingresa tu nombre completo</div>
-        </div>
-
-        <div class="form-group">
-            <label for="email" class="required">Correo electrónico</label>
-            <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
-            <div id="email-error" class="error">Por favor ingresa un correo electrónico válido</div>
-        </div>
-
-        <h2>Percepción de efectividad</h2>
-        
-        <div class="form-group">
-            <label class="required">1. ¿Consideras que tus métodos de estudio son efectivos para entender los contenidos?</label>
-            <div class="radio-group">
-                <div class="radio-option">
-                    <input type="radio" id="efectividad_muy" name="efectividad" value="Muy efectivos" required>
-                    <label for="efectividad_muy">Muy efectivos</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="efectividad_efectivos" name="efectividad" value="Efectivos">
-                    <label for="efectividad_efectivos">Efectivos</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="efectividad_poco" name="efectividad" value="Poco efectivos">
-                    <label for="efectividad_poco">Poco efectivos</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="efectividad_nada" name="efectividad" value="Nada efectivos">
-                    <label for="efectividad_nada">Nada efectivos</label>
-                </div>
-            </div>
-            <div id="efectividad-error" class="error">Por favor selecciona una opción</div>
-        </div>
-        
-        <div class="form-group">
-            <label for="metodos_efectivos" class="required">2. ¿Qué método(s) crees que te ayuda(n) más a memorizar y comprender?</label>
-            <textarea id="metodos_efectivos" name="metodos_efectivos" placeholder="Explica brevemente por qué..." required></textarea>
-            <div id="metodos_efectivos-error" class="error">Por favor describe tus métodos</div>
-        </div>
-        
-        <div class="form-group">
-            <label class="required">3. ¿Qué dificultades enfrentas al estudiar? (Marca las que apliquen)</label>
-            <div class="checkbox-group">
-                <div class="checkbox-option">
-                    <input type="checkbox" id="dificultad_tiempo" name="dificultades" value="Falta de tiempo">
-                    <label for="dificultad_tiempo">Falta de tiempo</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="dificultad_motivacion" name="dificultades" value="Falta de motivación">
-                    <label for="dificultad_motivacion">Falta de motivación</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="dificultad_concentracion" name="dificultades" value="Problemas de concentración">
-                    <label for="dificultad_concentracion">Problemas de concentración</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="dificultad_organizacion" name="dificultades" value="Dificultad para organizarme">
-                    <label for="dificultad_organizacion">Dificultad para organizarme</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="dificultad_entendimiento" name="dificultades" value="No entiendo los temas">
-                    <label for="dificultad_entendimiento">No entiendo los temas</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="dificultad_otros" name="dificultades" value="Otros">
-                    <label for="dificultad_otros">Otros</label>
-                </div>
-                <div id="otros_dificultades_container" class="conditional-input">
-                    <input type="text" id="otros_dificultades" name="otros_dificultades" placeholder="Especifica otras dificultades...">
-                </div>
-            </div>
-            <div id="dificultades-error" class="error">Por favor selecciona al menos una opción</div>
-        </div>
-        
-        <div class="form-group">
-            <label class="required">4. ¿Has cambiado de método de estudio desde que comenzaste la carrera?</label>
-            <div class="radio-group">
-                <div class="radio-option">
-                    <input type="radio" id="cambio_si" name="cambio_metodo" value="Sí" required>
-                    <label for="cambio_si">Sí</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="cambio_no" name="cambio_metodo" value="No">
-                    <label for="cambio_no">No</label>
-                </div>
-            </div>
-            <div id="cambio_metodo-error" class="error">Por favor selecciona una opción</div>
-            <div id="razon_cambio_container" class="conditional-input">
-                <label for="razon_cambio">¿Por qué lo cambiaste?</label>
-                <textarea id="razon_cambio" name="razon_cambio" placeholder="Explica brevemente..."></textarea>
-            </div>
-        </div>
-        
-        <h2>Relación con el rendimiento académico</h2>
-        
-        <div class="form-group">
-            <label class="required">1. ¿Cuál fue tu promedio general en el último semestre (aproximado)?</label>
-            <div class="radio-group">
-                <div class="radio-option">
-                    <input type="radio" id="promedio_menos60" name="promedio" value="Menor a 60%" required>
-                    <label for="promedio_menos60">Menor a 60%</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="promedio_60_70" name="promedio" value="60% - 70%">
-                    <label for="promedio_60_70">60% - 70%</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="promedio_71_80" name="promedio" value="71% - 80%">
-                    <label for="promedio_71_80">71% - 80%</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="promedio_81_90" name="promedio" value="81% - 90%">
-                    <label for="promedio_81_90">81% - 90%</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="promedio_mas90" name="promedio" value="Mayor a 90%">
-                    <label for="promedio_mas90">Mayor a 90%</label>
-                </div>
-            </div>
-            <div id="promedio-error" class="error">Por favor selecciona una opción</div>
-        </div>
-        
-        <div class="form-group">
-            <label class="required">2. ¿Consideras que el método de estudio que usas influye directamente en tu rendimiento académico?</label>
-            <div class="radio-group">
-                <div class="radio-option">
-                    <input type="radio" id="influencia_si" name="influencia" value="Sí" required>
-                    <label for="influencia_si">Sí</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="influencia_no" name="influencia" value="No">
-                    <label for="influencia_no">No</label>
-                </div>
-            </div>
-            <div id="influencia-error" class="error">Por favor selecciona una opción</div>
-            <div>
-                <label for="explicacion_influencia" class="required">Explica brevemente tu respuesta:</label>
-                <textarea id="explicacion_influencia" name="explicacion_influencia" required></textarea>
-                <div id="explicacion_influencia-error" class="error">Por favor explica tu respuesta</div>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="required">3. ¿Estarías dispuesto/a a cambiar tu método de estudio si supieras que otro es más efectivo?</label>
-            <div class="radio-group">
-                <div class="radio-option">
-                    <input type="radio" id="disposicion_si" name="disposicion" value="Sí" required>
-                    <label for="disposicion_si">Sí</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="disposicion_no" name="disposicion" value="No">
-                    <label for="disposicion_no">No</label>
-                </div>
-            </div>
-            <div id="disposicion-error" class="error">Por favor selecciona una opción</div>
-            <div>
-                <label for="explicacion_disposicion" class="required">¿Por qué?</label>
-                <textarea id="explicacion_disposicion" name="explicacion_disposicion" required></textarea>
-                <div id="explicacion_disposicion-error" class="error">Por favor explica tu respuesta</div>
-            </div>
-        </div>
-        
-        <div id="loading">Enviando datos, por favor espera...</div>
-        
-        <button type="submit" id="submitBtn">Enviar Encuesta</button>
-    </form>
     
-    <div id="successMessage" class="success-message">
-        ¡Gracias por completar la encuesta! Los datos han sido enviados correctamente.
-    </div>
-
-    <script>
-        // Configuración del correo de destino
-        const DESTINATION_EMAIL = "alderdelgado412@gmail.com";
+    <!-- Contenido de la encuesta -->
+    <div id="encuesta" class="tab-content active">
+        <h2>Encuesta de Métodos de Estudio - Medicina</h2>
+        <p>Por favor, completa esta encuesta para ayudarnos a mejorar las estrategias de enseñanza y aprendizaje.</p>
         
-        // Cuando el documento está listo
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mostrar/ocultar campo "Otros" en dificultades
-            document.getElementById('dificultad_otros').addEventListener('change', function() {
-                document.getElementById('otros_dificultades_container').style.display = 
-                    this.checked ? 'block' : 'none';
-            });
+        <form id="encuestaForm" class="form-container" action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
+            <!-- Añadido para FormSubmit -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://tudominio.github.io/turepositorio/gracias.html">
+            <input type="hidden" name="_subject" value="Nueva respuesta de encuesta de métodos de estudio">
+            <input type="text" name="_honey" style="display:none">
             
-            // Mostrar/ocultar campo para razón de cambio de método
-            document.querySelectorAll('input[name="cambio_metodo"]').forEach(function(radio) {
-                radio.addEventListener('change', function() {
-                    document.getElementById('razon_cambio_container').style.display = 
-                        (this.value === 'Sí') ? 'block' : 'none';
-                });
-            });
+            <h3>Sección 1: Datos generales</h3>
             
-            // Manejar el envío del formulario
-            document.getElementById('studyMethodsForm').addEventListener('submit', function(e) {
-                e.preventDefault();
+            <div class="form-group">
+                <label for="edad">1. Edad:<span class="required-star">*</span></label>
+                <input type="number" id="edad" name="edad" min="16" max="99" required>
+                <div class="error-message" id="error-edad">Por favor ingresa tu edad.</div>
+            </div>
+            
+            <div class="form-group">
+                <label>2. Sexo:<span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="sexo" value="Masculino" required> Masculino
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="sexo" value="Femenino"> Femenino
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="sexo" value="Otro"> Otro
+                    </label>
+                </div>
+                <div class="error-message" id="error-sexo">Por favor selecciona una opción.</div>
+            </div>
+            
+            <div class="form-group">
+                <label>3. ¿Estás cursando por primera vez el primer año de la carrera de Medicina?<span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="primer_año" value="Sí" required> Sí
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="primer_año" value="No"> No
+                    </label>
+                </div>
+                <div class="error-message" id="error-primerAno">Por favor selecciona una opción.</div>
+            </div>
+            
+            <h3>Sección 2: Métodos de estudio utilizados</h3>
+            <p class="section-description">(Objetivo 1)</p>
+            
+            <div class="form-group">
+                <label>1. ¿Con qué frecuencia estudias durante la semana?<span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="frecuencia_estudio" value="Todos los días" required> Todos los días
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frecuencia_estudio" value="4-5 veces por semana"> 4-5 veces por semana
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frecuencia_estudio" value="2-3 veces por semana"> 2-3 veces por semana
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frecuencia_estudio" value="1 vez por semana o menos"> 1 vez por semana o menos
+                    </label>
+                </div>
+                <div class="error-message" id="error-frecuencia">Por favor selecciona una opción.</div>
+            </div>
+            
+            <div class="form-group">
+                <label>2. ¿Sueles estudiar solo o en grupo?<span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="estudio_grupo_solo" value="Solo" required> Solo
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="estudio_grupo_solo" value="En grupo"> En grupo
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="estudio_grupo_solo" value="Ambos" id="radioAmbos"> Ambos
+                    </label>
+                </div>
+                <div class="error-message" id="error-grupoSolo">Por favor selecciona una opción.</div>
                 
-                // Validar el formulario
-                if (!validateForm()) {
-                    return;
+                <div class="form-group sub-question" id="tiempoDiario">
+                    <label>¿Cuánto tiempo dedicas al estudio fuera del horario de clases en promedio por día?<span class="required-star">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="tiempo_estudio_diario" value="Menos de 1 hora"> Menos de 1 hora
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="tiempo_estudio_diario" value="1 a 2 horas"> 1 a 2 horas
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="tiempo_estudio_diario" value="2 a 4 horas"> 2 a 4 horas
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="tiempo_estudio_diario" value="Más de 4 horas"> Más de 4 horas
+                        </label>
+                    </div>
+                    <div class="error-message" id="error-tiempoEstudio">Por favor selecciona una opción.</div>
+                </div>
+            </div>
+            
+            <button type="submit">Enviar encuesta</button>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            <h3>¡Gracias por completar la encuesta!</h3>
+            <p>Tus respuestas han sido registradas correctamente.</p>
+        </div>
+    </div>
+    
+    <!-- Contenido del creador de flujo -->
+    <div id="flujo" class="tab-content">
+        <h2>¿Cuál es tu flujo de estudio?</h2>
+        <p style="text-align: center;">Selecciona las actividades en el orden en que las realizas al estudiar</p>
+
+        <div class="container">
+            <div class="options-panel">
+                <h3>Actividades de estudio disponibles</h3>
+                <button class="option-btn" onclick="agregarAlFlujo('Ver videos')">Ver videos</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Leer apuntes')">Leer apuntes</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Hacer resumen')">Hacer resumen</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Practicar preguntas')">Practicar preguntas</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Repetir en voz alta')">Repetir en voz alta</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Repasar con flashcards')">Repasar con flashcards</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Hacer mapas conceptuales')">Hacer mapas conceptuales</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Resolver preguntas')">Resolver preguntas</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Enseñar a alguien')">Enseñar a alguien</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Subrayar')">Subrayar</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Dibujar esquemas')">Dibujar esquemas</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Autoevaluación')">Autoevaluación</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Hacer exámenes anteriores')">Hacer exámenes anteriores</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Empezar a leer libro')">Empezar a leer libro</button>
+                <button class="option-btn" onclick="agregarAlFlujo('Leer resúmenes')">Leer resúmenes</button>
+                
+                <div class="custom-option-container">
+                    <h3>Agregar actividad personalizada</h3>
+                    <input type="text" id="customOptionInput" placeholder="Escribe tu propia actividad...">
+                    <button class="option-btn" style="background-color: #e8f5e9; border-color: #c8e6c9;" onclick="agregarOpcionPersonalizada()">+ Agregar actividad personalizada</button>
+                </div>
+            </div>
+            
+            <div class="flow-panel">
+                <h3>Tu flujo de estudio</h3>
+                <div id="flujoContainer">
+                    <div class="message">Haz clic en las actividades para crear tu flujo de estudio...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-btns">
+            <button class="flow-btn reset" onclick="reiniciarFlujo()">Reiniciar flujo</button>
+            <button class="flow-btn" onclick="guardarFlujo()">Guardar flujo</button>
+        </div>
+    </div>
+    
+    <script>
+        // Funcionalidad de pestañas
+        function openTab(tabName) {
+            const tabs = document.getElementsByClassName('tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Funcionalidad de la encuesta
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('encuestaForm');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                let formValido = true;
+                
+                // Validar edad
+                const edad = document.getElementById('edad');
+                if (!edad.value) {
+                    document.getElementById('error-edad').style.display = 'block';
+                    formValido = false;
+                } else {
+                    document.getElementById('error-edad').style.display = 'none';
                 }
                 
-                // Obtener los datos del formulario
-                const formData = new FormData(this);
-                const formObject = {};
-                formData.forEach((value, key) => {
-                    // Para checkboxes con múltiples selecciones
-                    if (formObject[key]) {
-                        if (!Array.isArray(formObject[key])) {
-                            formObject[key] = [formObject[key]];
-                        }
-                        formObject[key].push(value);
-                    } else {
-                        formObject[key] = value;
-                    }
-                });
+                // Validar sexo
+                const sexo = document.querySelector('input[name="sexo"]:checked');
+                if (!sexo) {
+                    document.getElementById('error-sexo').style.display = 'block';
+                    formValido = false;
+                } else {
+                    document.getElementById('error-sexo').style.display = 'none';
+                }
                 
-                // Mostrar loading
-                document.getElementById('loading').style.display = 'block';
-                document.getElementById('submitBtn').style.display = 'none';
+                // Validar primer año
+                const primerAno = document.querySelector('input[name="primer_año"]:checked');
+                if (!primerAno) {
+                    document.getElementById('error-primerAno').style.display = 'block';
+                    formValido = false;
+                } else {
+                    document.getElementById('error-primerAno').style.display = 'none';
+                }
                 
-                // Enviar los datos usando Formspree
-                fetch("https://formspree.io/f/" + DESTINATION_EMAIL, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formObject),
-                    mode: 'no-cors'
-                })
-                .then(() => {
+                // Validar frecuencia
+                const frecuencia = document.querySelector('input[name="frecuencia_estudio"]:checked');
+                if (!frecuencia) {
+                    document.getElementById('error-frecuencia').style.display = 'block';
+                    formValido = false;
+                } else {
+                    document.getElementById('error-frecuencia').style.display = 'none';
+                }
+                
+                // Validar estudio solo/grupo
+                const grupoSolo = document.querySelector('input[name="estudio_grupo_solo"]:checked');
+                if (!grupoSolo) {
+                    document.getElementById('error-grupoSolo').style.display = 'block';
+                    formValido = false;
+                } else {
+                    document.getElementById('error-grupoSolo').style.display = 'none';
+                }
+                
+                // Validar tiempo de estudio
+                const tiempoEstudio = document.querySelector('input[name="tiempo_estudio_diario"]:checked');
+                if (!tiempoEstudio) {
+                    document.getElementById('error-tiempoEstudio').style.display = 'block';
+                    formValido = false;
+                } else {
+                    document.getElementById('error-tiempoEstudio').style.display = 'none';
+                }
+                
+                if (formValido) {
                     // Mostrar mensaje de éxito
+                    form.style.display = 'none';
                     document.getElementById('successMessage').style.display = 'block';
-                    document.getElementById('studyMethodsForm').reset();
-                    document.getElementById('loading').style.display = 'none';
                     
-                    // Scroll al mensaje de éxito
-                    document.getElementById('successMessage').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un error al enviar la encuesta. Por favor inténtalo de nuevo.');
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('submitBtn').style.display = 'block';
-                });
+                    // Enviar el formulario a FormSubmit
+                    form.submit();
+                }
             });
         });
         
-        // Función para validar el formulario
-        function validateForm() {
-            let isValid = true;
+        // Funcionalidad del creador de flujo
+        let pasosFlujo = [];
+        
+        function agregarAlFlujo(actividad) {
+            pasosFlujo.push(actividad);
+            actualizarVisualizacion();
+        }
+        
+        function agregarOpcionPersonalizada() {
+            const customInput = document.getElementById('customOptionInput');
+            const nuevaActividad = customInput.value.trim();
             
-            // Validar nombre
-            const nombre = document.getElementById('nombre').value.trim();
-            if (nombre === '') {
-                document.getElementById('nombre-error').style.display = 'block';
-                isValid = false;
+            if (nuevaActividad) {
+                agregarAlFlujo(nuevaActividad);
+                customInput.value = '';
             } else {
-                document.getElementById('nombre-error').style.display = 'none';
+                alert('Por favor, escribe una actividad personalizada.');
+            }
+        }
+        
+        function eliminarPaso(index) {
+            pasosFlujo.splice(index, 1);
+            actualizarVisualizacion();
+        }
+        
+        function actualizarVisualizacion() {
+            const container = document.getElementById('flujoContainer');
+            
+            if (pasosFlujo.length === 0) {
+                container.innerHTML = '<div class="message">Haz clic en las actividades para crear tu flujo de estudio...</div>';
+                return;
             }
             
-            // Validar email
-            const email = document.getElementById('email').value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                document.getElementById('email-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('email-error').style.display = 'none';
+            let html = '';
+            
+            pasosFlujo.forEach((paso, index) => {
+                html += `
+                    <div class="flow-step">
+                        <div class="step-number">${index + 1}</div>
+                        <div class="step-text">${paso}</div>
+                        <div class="remove-btn" onclick="eliminarPaso(${index})">×</div>
+                    </div>
+                `;
+                
+                if (index < pasosFlujo.length - 1) {
+                    html += '<div class="arrow">↓</div>';
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function reiniciarFlujo() {
+            pasosFlujo = [];
+            actualizarVisualizacion();
+            alert('Tu flujo de estudio ha sido reiniciado.');
+        }
+        
+        function guardarFlujo() {
+            if (pasosFlujo.length === 0) {
+                alert('Por favor, agrega al menos una actividad a tu flujo de estudio antes de guardar.');
+                return;
             }
             
-            // Validar efectividad
-            const efectividad = document.querySelector('input[name="efectividad"]:checked');
-            if (!efectividad) {
-                document.getElementById('efectividad-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('efectividad-error').style.display = 'none';
-            }
-            
-            // Validar métodos efectivos
-            const metodosEfectivos = document.getElementById('metodos_efectivos').value.trim();
-            if (metodosEfectivos === '') {
-                document.getElementById('metodos_efectivos-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('metodos_efectivos-error').style.display = 'none';
-            }
-            
-            // Validar dificultades
-            const dificultades = document.querySelectorAll('input[name="dificultades"]:checked');
-            if (dificultades.length === 0) {
-                document.getElementById('dificultades-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('dificultades-error').style.display = 'none';
-            }
-            
-            // Validar cambio de método
-            const cambioMetodo = document.querySelector('input[name="cambio_metodo"]:checked');
-            if (!cambioMetodo) {
-                document.getElementById('cambio_metodo-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('cambio_metodo-error').style.display = 'none';
-            }
-            
-            // Validar promedio
-            const promedio = document.querySelector('input[name="promedio"]:checked');
-            if (!promedio) {
-                document.getElementById('promedio-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('promedio-error').style.display = 'none';
-            }
-            
-            // Validar influencia
-            const influencia = document.querySelector('input[name="influencia"]:checked');
-            if (!influencia) {
-                document.getElementById('influencia-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('influencia-error').style.display = 'none';
-            }
-            
-            // Validar explicación influencia
-            const explicacionInfluencia = document.getElementById('explicacion_influencia').value.trim();
-            if (explicacionInfluencia === '') {
-                document.getElementById('explicacion_influencia-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('explicacion_influencia-error').style.display = 'none';
-            }
-            
-            // Validar disposición
-            const disposicion = document.querySelector('input[name="disposicion"]:checked');
-            if (!disposicion) {
-                document.getElementById('disposicion-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('disposicion-error').style.display = 'none';
-            }
-            
-            // Validar explicación disposición
-            const explicacionDisposicion = document.getElementById('explicacion_disposicion').value.trim();
-            if (explicacionDisposicion === '') {
-                document.getElementById('explicacion_disposicion-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('explicacion_disposicion-error').style.display = 'none';
-            }
-            
-            return isValid;
+            alert('¡Flujo de estudio guardado correctamente!\n\nTu flujo de estudio es:\n' + pasosFlujo.join(' → '));
         }
     </script>
 </body>
