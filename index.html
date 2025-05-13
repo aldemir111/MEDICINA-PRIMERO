@@ -1,564 +1,489 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Encuesta sobre Rendimiento Académico y Técnicas de Estudio - Paraguay</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    h1, h2 {
-      text-align: center;
-      color: #2a6592;
-    }
-    form {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 800px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .section {
-      border-top: 1px solid #eee;
-      margin-top: 30px;
-      padding-top: 20px;
-    }
-    .question {
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px dashed #eaeaea;
-    }
-    .question strong {
-      display: block;
-      margin-bottom: 10px;
-    }
-    label {
-      display: block;
-      margin: 8px 0;
-    }
-    input[type=text], input[type=number], input[type=email], select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    textarea {
-      height: 80px;
-      resize: vertical;
-    }
-    .required:after {
-      content: " *";
-      color: red;
-    }
-    .range-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 5px;
-      font-size: 0.8em;
-      color: #666;
-    }
-    button {
-      padding: 12px 24px;
-      background: #2a6592;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      display: block;
-      margin: 20px auto 0;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #1d4870;
-    }
-    .intro {
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #555;
-    }
-    .progress-bar {
-      background: #e0e0e0;
-      height: 10px;
-      border-radius: 5px;
-      margin-bottom: 30px;
-    }
-    .progress {
-      background: #2a6592;
-      height: 10px;
-      border-radius: 5px;
-      width: 0%;
-      transition: width 0.3s;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-    @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: 1fr;
-      }
-    }
-    .highlight {
-      background-color: #ffeeba;
-      padding: 10px;
-      border-radius: 5px;
-      border-left: 4px solid #ffc107;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta sobre Métodos de Estudio - Obligatoria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 40px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        input[type="text"], 
+        input[type="email"],
+        textarea, 
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .radio-group, 
+        .checkbox-group {
+            margin-top: 8px;
+        }
+        .radio-option, 
+        .checkbox-option {
+            margin-bottom: 10px;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            width: 200px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .success-message {
+            text-align: center;
+            color: #27ae60;
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f8f5;
+            border-radius: 4px;
+            display: none;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .conditional-input {
+            margin-top: 15px;
+            margin-left: 30px;
+            display: none;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-
-  <h1>Encuesta sobre Rendimiento Académico y Técnicas de Estudio</h1>
-  <h2>Facultad de Medicina - Universidad Nacional de Concepción</h2>
-  
-  <!-- FORMULARIO ACTUALIZADO CON FORMSUBMIT -->
-  <form id="academicSurvey" action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
-    <!-- Configuración de FormSubmit -->
-    <input type="hidden" name="_subject" value="Nueva encuesta académica - Universidad Nacional de Concepción">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="https://aldemir111.github.io/encuesta-academica/gracias.html">
-    <input type="text" name="_honey" style="display:none"> <!-- Anti-spam -->
-    <input type="hidden" name="_captcha" value="false">
+    <h1>Encuesta sobre Métodos de Estudio</h1>
     
-    <div class="intro">
-      <p>Esta encuesta forma parte de un proyecto de investigación académica para estudiantes de Medicina de la Universidad Nacional de Concepción. Toda la información proporcionada será tratada de manera confidencial y anónima, utilizándose exclusivamente con fines de investigación.</p>
-      <p><strong>Tiempo estimado:</strong> 10-15 minutos</p>
-    </div>
-    
-    <div class="progress-bar">
-      <div class="progress" id="progress"></div>
+    <div class="card">
+        <p>Esta encuesta tiene como objetivo comprender la efectividad de diferentes métodos de estudio y su relación con el rendimiento académico. Todos los campos son obligatorios.</p>
     </div>
 
-    <!-- SECCIÓN 1: DATOS DEMOGRÁFICOS -->
-    <h2>Datos Generales</h2>
-    
-    <div class="question">
-      <strong class="required">Nombre completo (opcional)</strong>
-      <input type="text" name="nombre" placeholder="Puedes dejarlo en blanco si prefieres mantener el anonimato">
-    </div>
-    
-    <div class="question">
-      <strong class="required">Edad</strong>
-      <input type="number" name="edad" min="16" max="99" required>
-    </div>
-    
-    <div class="question">
-      <strong class="required">Género</strong>
-      <label><input type="radio" name="genero" value="masculino" required> Masculino</label>
-      <label><input type="radio" name="genero" value="femenino"> Femenino</label>
-      <label><input type="radio" name="genero" value="otro"> Otro</label>
-      <label><input type="radio" name="genero" value="prefiero-no-decir"> Prefiero no decir</label>
-    </div>
-    
-    <div class="question">
-      <strong class="required">Año que cursas actualmente</strong>
-      <select name="anio" required>
-        <option value="">Selecciona una opción</option>
-        <option value="1">1er año</option>
-        <option value="2">2do año</option>
-        <option value="3">3er año</option>
-        <option value="4">4to año</option>
-        <option value="5">5to año</option>
-        <option value="6">6to año</option>
-      </select>
-    </div>
-
-    <!-- SECCIÓN ALDEMIR -->
-    <div class="section highlight">
-      <h2>Sobre Aldemir</h2>
-      
-      <div class="question">
-        <strong class="required">Aldemir es el más:</strong>
-        <label><input type="radio" name="aldemir" value="inteligente" required> Inteligente</label>
-        <label><input type="radio" name="aldemir" value="churro"> Churro</label>
-        <label><input type="radio" name="aldemir" value="guapo"> Guapo</label>
-        <label><input type="radio" name="aldemir" value="vale"> Vale</label>
-        <label><input type="radio" name="aldemir" value="mejor"> El mejor</label>
-        <label><input type="radio" name="aldemir" value="todas"> Todas las anteriores</label>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 2: RENDIMIENTO ACADÉMICO -->
-    <div class="section">
-      <h2>Rendimiento Académico</h2>
-      
-      <div class="question">
-        <strong class="required">Promedio general en colegio</strong>
-        <select name="promedio-colegio" required>
-          <option value="">Selecciona una opción</option>
-          <option value="1.0-1.9">1.0 - 1.9</option>
-          <option value="2.0-2.9">2.0 - 2.9</option>
-          <option value="3.0-3.9">3.0 - 3.9</option>
-          <option value="4.0-4.5">4.0 - 4.5</option>
-          <option value="4.6-5.0">4.6 - 5.0</option>
-        </select>
-      </div>
-      
-      <div class="question">
-        <strong>Promedio general en universidad (si aplica)</strong>
-        <select name="promedio-universidad">
-          <option value="">Selecciona una opción</option>
-          <option value="no-aplica">No aplica</option>
-          <option value="1.0-1.9">1.0 - 1.9</option>
-          <option value="2.0-2.9">2.0 - 2.9</option>
-          <option value="3.0-3.9">3.0 - 3.9</option>
-          <option value="4.0-4.5">4.0 - 4.5</option>
-          <option value="4.6-5.0">4.6 - 5.0</option>
-        </select>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Cómo consideras tu rendimiento académico actual?</strong>
-        <label><input type="radio" name="rendimiento" value="excelente" required> Excelente</label>
-        <label><input type="radio" name="rendimiento" value="bueno"> Bueno</label>
-        <label><input type="radio" name="rendimiento" value="regular"> Regular</label>
-        <label><input type="radio" name="rendimiento" value="malo"> Malo</label>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 3: RECURSAMIENTO DE MATERIAS -->
-    <div class="section">
-      <h2>Recursamiento de Materias</h2>
-      
-      <div class="question">
-        <strong class="required">¿Has recursado (repetido) alguna materia?</strong>
-        <label><input type="radio" name="recursado" value="si" required> Sí</label>
-        <label><input type="radio" name="recursado" value="no"> No</label>
-      </div>
-      
-      <div class="question recursado-info" style="display:none;">
-        <strong>¿Cuántas materias has recursado?</strong>
-        <select name="num-recursadas">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5+">5 o más</option>
-        </select>
-      </div>
-      
-      <div class="question recursado-info" style="display:none;">
-        <strong>Principal motivo por el que has recursado materias (selecciona todos los que apliquen)</strong>
-        <label><input type="checkbox" name="motivo-recursado" value="tiempo"> Falta de tiempo para estudiar</label>
-        <label><input type="checkbox" name="motivo-recursado" value="dificultad"> Dificultad para entender la materia</label>
-        <label><input type="checkbox" name="motivo-recursado" value="profesor"> Problemas con el profesor/metodología</label>
-        <label><input type="checkbox" name="motivo-recursado" value="personales"> Problemas personales</label>
-        <label><input type="checkbox" name="motivo-recursado" value="salud"> Problemas de salud</label>
-        <label><input type="checkbox" name="motivo-recursado" value="economicos"> Problemas económicos</label>
-        <label><input type="checkbox" name="motivo-recursado" value="familia"> Responsabilidades familiares</label>
-        <label><input type="checkbox" name="motivo-recursado" value="trabajo"> Carga laboral</label>
-        <label><input type="checkbox" name="motivo-recursado" value="estres"> Estrés o ansiedad</label>
-        <label><input type="checkbox" name="motivo-recursado" value="otro"> Otro</label>
-      </div>
-      
-      <div class="question recursado-info" style="display:none;">
-        <strong>Si seleccionaste "Otro", especifica:</strong>
-        <textarea name="otro-motivo-recursado"></textarea>
-      </div>
-      
-      <div class="question recursado-info" style="display:none;">
-        <strong>¿Cómo afectó el recursamiento a tu percepción sobre tus estudios?</strong>
-        <label><input type="radio" name="percepcion-recursado" value="negativo"> Me desmotivó</label>
-        <label><input type="radio" name="percepcion-recursado" value="positivo"> Me hizo esforzarme más</label>
-        <label><input type="radio" name="percepcion-recursado" value="neutro"> No tuvo efecto significativo</label>
-        <label><input type="radio" name="percepcion-recursado" value="mixto"> Tuvo efectos mixtos</label>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 4: HÁBITOS Y TÉCNICAS DE ESTUDIO -->
-    <div class="section">
-      <h2>Hábitos y Técnicas de Estudio</h2>
-      
-      <div class="question">
-        <strong class="required">¿Cuántas horas estudias por día en promedio?</strong>
-        <label><input type="radio" name="horas-estudio" value="menos-1" required> Menos de 1 hora</label>
-        <label><input type="radio" name="horas-estudio" value="1-2"> 1-2 horas</label>
-        <label><input type="radio" name="horas-estudio" value="3-4"> 3-4 horas</label>
-        <label><input type="radio" name="horas-estudio" value="más-4"> Más de 4 horas</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Con qué frecuencia estudias antes de un examen?</strong>
-        <label><input type="radio" name="frecuencia-estudio" value="mismo-día" required> El mismo día</label>
-        <label><input type="radio" name="frecuencia-estudio" value="1-2"> 1-2 días antes</label>
-        <label><input type="radio" name="frecuencia-estudio" value="3-5"> 3-5 días antes</label>
-        <label><input type="radio" name="frecuencia-estudio" value="semana"> Una semana o más antes</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Qué técnicas de estudio utilizas? (Marca todas las que apliquen)</strong>
-        <div class="grid-container">
-          <label><input type="checkbox" name="tecnicas" value="resúmenes"> Resúmenes o esquemas</label>
-          <label><input type="checkbox" name="tecnicas" value="mapas"> Mapas mentales o conceptuales</label>
-          <label><input type="checkbox" name="tecnicas" value="reescritura"> Reescritura de apuntes</label>
-          <label><input type="checkbox" name="tecnicas" value="pomodoro"> Técnica Pomodoro</label>
-          <label><input type="checkbox" name="tecnicas" value="feynman"> Técnica Feynman (explicar a otros)</label>
-          <label><input type="checkbox" name="tecnicas" value="flashcards"> Flashcards o tarjetas de memoria</label>
-          <label><input type="checkbox" name="tecnicas" value="grupo"> Estudio en grupo</label>
-          <label><input type="checkbox" name="tecnicas" value="enseñar"> Enseñar a otros</label>
-          <label><input type="checkbox" name="tecnicas" value="grabaciones"> Grabaciones de audio</label>
-          <label><input type="checkbox" name="tecnicas" value="videos"> Videos o recursos multimedia</label>
+    <form id="studyMethodsForm">
+        <div class="form-group">
+            <label for="nombre" class="required">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <div id="nombre-error" class="error">Por favor ingresa tu nombre completo</div>
         </div>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Con qué frecuencia usas recursos digitales (YouTube, apps, plataformas educativas)?</strong>
-        <label><input type="radio" name="recursos-digitales" value="nunca" required> Nunca</label>
-        <label><input type="radio" name="recursos-digitales" value="a-veces"> A veces</label>
-        <label><input type="radio" name="recursos-digitales" value="frecuente"> Frecuentemente</label>
-        <label><input type="radio" name="recursos-digitales" value="siempre"> Siempre</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Sientes que tus técnicas de estudio actuales son efectivas?</strong>
-        <label><input type="radio" name="efectividad" value="sí" required> Sí</label>
-        <label><input type="radio" name="efectividad" value="no"> No</label>
-        <label><input type="radio" name="efectividad" value="parcial"> Parcialmente</label>
-      </div>
-      
-      <div class="question">
-        <strong>¿Cuál de las técnicas de estudio crees que más te ha ayudado a mejorar tus notas?</strong>
-        <textarea name="mejor-tecnica" placeholder="Explica qué técnica te resulta más efectiva y por qué..."></textarea>
-      </div>
-    </div>
 
-    <!-- SECCIÓN 5: FACTORES QUE INFLUYEN EN EL RENDIMIENTO -->
-    <div class="section">
-      <h2>Factores que Influyen en el Rendimiento</h2>
-      
-      <div class="question">
-        <strong class="required">¿Crees que tus notas dependen más de tus técnicas de estudio o de las clases que recibes?</strong>
-        <label><input type="radio" name="dependencia" value="técnicas" required> Técnicas de estudio</label>
-        <label><input type="radio" name="dependencia" value="clases"> Clases</label>
-        <label><input type="radio" name="dependencia" value="ambas"> Ambas por igual</label>
-        <label><input type="radio" name="dependencia" value="ninguna"> Ninguna</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">Cuando no entiendes un tema en clase, ¿qué haces?</strong>
-        <label><input type="radio" name="no-entiendes" value="no-estudia" required> No estudio ese tema</label>
-        <label><input type="radio" name="no-entiendes" value="investiga"> Investigo por mi cuenta</label>
-        <label><input type="radio" name="no-entiendes" value="usa-técnica"> Uso una técnica de estudio específica</label>
-        <label><input type="radio" name="no-entiendes" value="pide-ayuda"> Pido ayuda a un compañero o tutor</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Sientes que las clases te motivan a estudiar más por tu cuenta?</strong>
-        <label><input type="radio" name="motivacion" value="mucho" required> Sí, mucho</label>
-        <label><input type="radio" name="motivacion" value="poco"> Un poco</label>
-        <label><input type="radio" name="motivacion" value="no-motivan"> No me motivan</label>
-        <label><input type="radio" name="motivacion" value="estudio-solo"> Todo lo estudio por mi cuenta</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Has notado mejora en tus notas al cambiar tu forma de estudiar o asistir más a clases?</strong>
-        <label><input type="radio" name="mejora" value="estudiar" required> Sí, al cambiar mi forma de estudiar</label>
-        <label><input type="radio" name="mejora" value="asistir"> Sí, al asistir más a clases</label>
-        <label><input type="radio" name="mejora" value="ambas"> Sí, por ambas razones</label>
-        <label><input type="radio" name="mejora" value="no-cambios"> No he notado cambios</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">¿Cómo calificarías tu nivel de concentración al estudiar?</strong>
-        <label><input type="radio" name="concentracion" value="muy-bajo" required> Muy bajo</label>
-        <label><input type="radio" name="concentracion" value="bajo"> Bajo</label>
-        <label><input type="radio" name="concentracion" value="medio"> Medio</label>
-        <label><input type="radio" name="concentracion" value="alto"> Alto</label>
-      </div>
-      
-      <div class="question">
-        <strong class="required">Valora los siguientes factores según cómo afectan tu rendimiento académico:</strong>
+        <div class="form-group">
+            <label for="email" class="required">Correo electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
+            <div id="email-error" class="error">Por favor ingresa un correo electrónico válido</div>
+        </div>
+
+        <h2>Percepción de efectividad</h2>
         
-        <div class="factor-rating">
-          <p>Ambiente de estudio (ruido, iluminación, comodidad)</p>
-          <input type="range" name="factor-ambiente" min="1" max="5" value="3" required>
-          <div class="range-labels">
-            <span>No afecta</span>
-            <span>Afecta mucho</span>
-          </div>
+        <div class="form-group">
+            <label class="required">1. ¿Consideras que tus métodos de estudio son efectivos para entender los contenidos?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="efectividad_muy" name="efectividad" value="Muy efectivos" required>
+                    <label for="efectividad_muy">Muy efectivos</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="efectividad_efectivos" name="efectividad" value="Efectivos">
+                    <label for="efectividad_efectivos">Efectivos</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="efectividad_poco" name="efectividad" value="Poco efectivos">
+                    <label for="efectividad_poco">Poco efectivos</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="efectividad_nada" name="efectividad" value="Nada efectivos">
+                    <label for="efectividad_nada">Nada efectivos</label>
+                </div>
+            </div>
+            <div id="efectividad-error" class="error">Por favor selecciona una opción</div>
         </div>
         
-        <div class="factor-rating">
-          <p>Estrés o ansiedad</p>
-          <input type="range" name="factor-estres" min="1" max="5" value="3" required>
-          <div class="range-labels">
-            <span>No afecta</span>
-            <span>Afecta mucho</span>
-          </div>
+        <div class="form-group">
+            <label for="metodos_efectivos" class="required">2. ¿Qué método(s) crees que te ayuda(n) más a memorizar y comprender?</label>
+            <textarea id="metodos_efectivos" name="metodos_efectivos" placeholder="Explica brevemente por qué..." required></textarea>
+            <div id="metodos_efectivos-error" class="error">Por favor describe tus métodos</div>
         </div>
         
-        <div class="factor-rating">
-          <p>Problemas personales o familiares</p>
-          <input type="range" name="factor-personales" min="1" max="5" value="3" required>
-          <div class="range-labels">
-            <span>No afecta</span>
-            <span>Afecta mucho</span>
-          </div>
+        <div class="form-group">
+            <label class="required">3. ¿Qué dificultades enfrentas al estudiar? (Marca las que apliquen)</label>
+            <div class="checkbox-group">
+                <div class="checkbox-option">
+                    <input type="checkbox" id="dificultad_tiempo" name="dificultades" value="Falta de tiempo">
+                    <label for="dificultad_tiempo">Falta de tiempo</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="dificultad_motivacion" name="dificultades" value="Falta de motivación">
+                    <label for="dificultad_motivacion">Falta de motivación</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="dificultad_concentracion" name="dificultades" value="Problemas de concentración">
+                    <label for="dificultad_concentracion">Problemas de concentración</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="dificultad_organizacion" name="dificultades" value="Dificultad para organizarme">
+                    <label for="dificultad_organizacion">Dificultad para organizarme</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="dificultad_entendimiento" name="dificultades" value="No entiendo los temas">
+                    <label for="dificultad_entendimiento">No entiendo los temas</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="dificultad_otros" name="dificultades" value="Otros">
+                    <label for="dificultad_otros">Otros</label>
+                </div>
+                <div id="otros_dificultades_container" class="conditional-input">
+                    <input type="text" id="otros_dificultades" name="otros_dificultades" placeholder="Especifica otras dificultades...">
+                </div>
+            </div>
+            <div id="dificultades-error" class="error">Por favor selecciona al menos una opción</div>
         </div>
         
-        <div class="factor-rating">
-          <p>Trabajo o responsabilidades extracurriculares</p>
-          <input type="range" name="factor-trabajo" min="1" max="5" value="3" required>
-          <div class="range-labels">
-            <span>No afecta</span>
-            <span>Afecta mucho</span>
-          </div>
+        <div class="form-group">
+            <label class="required">4. ¿Has cambiado de método de estudio desde que comenzaste la carrera?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="cambio_si" name="cambio_metodo" value="Sí" required>
+                    <label for="cambio_si">Sí</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="cambio_no" name="cambio_metodo" value="No">
+                    <label for="cambio_no">No</label>
+                </div>
+            </div>
+            <div id="cambio_metodo-error" class="error">Por favor selecciona una opción</div>
+            <div id="razon_cambio_container" class="conditional-input">
+                <label for="razon_cambio">¿Por qué lo cambiaste?</label>
+                <textarea id="razon_cambio" name="razon_cambio" placeholder="Explica brevemente..."></textarea>
+            </div>
         </div>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 6: ESTRATEGIAS DE MEJORA -->
-    <div class="section">
-      <h2>Estrategias de Mejora</h2>
-      
-      <div class="question">
-        <strong class="required">Si tuvieras que elegir, ¿qué preferirías para mejorar tus notas?</strong>
-        <label><input type="radio" name="preferencia-mejora" value="nuevas-técnicas" required> Aprender nuevas técnicas de estudio</label>
-        <label><input type="radio" name="preferencia-mejora" value="clases-dinámicas"> Tener clases más dinámicas y explicativas</label>
-        <label><input type="radio" name="preferencia-mejora" value="recursos-apoyo"> Más recursos de apoyo</label>
-        <label><input type="radio" name="preferencia-mejora" value="más-tiempo"> Más tiempo para estudio</label>
-      </div>
-      
-      <div class="question">
-        <strong>¿Qué tipo de apoyo institucional crees que te ayudaría a mejorar tu rendimiento académico? (Marca todos los que apliquen)</strong>
-        <label><input type="checkbox" name="apoyo" value="tutorias"> Tutorías personalizadas</label>
-        <label><input type="checkbox" name="apoyo" value="talleres"> Talleres sobre técnicas de estudio</label>
-        <label><input type="checkbox" name="apoyo" value="psicologico"> Apoyo psicológico</label>
-        <label><input type="checkbox" name="apoyo" value="recursos"> Más recursos bibliográficos o digitales</label>
-        <label><input type="checkbox" name="apoyo" value="becas"> Apoyos económicos o becas</label>
-        <label><input type="checkbox" name="apoyo" value="flexibilidad"> Mayor flexibilidad en horarios</label>
-        <label><input type="checkbox" name="apoyo" value="otro"> Otro</label>
-      </div>
-      
-      <div class="question">
-        <strong>Si seleccionaste "Otro", especifica:</strong>
-        <textarea name="otro-apoyo"></textarea>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 7: COMENTARIOS ADICIONALES -->
-    <div class="section">
-      <h2>Comentarios Adicionales</h2>
-      
-      <div class="question">
-        <strong>¿Hay algo más que quieras compartir sobre tus experiencias académicas, técnicas de estudio o factores que afectan tu rendimiento?</strong>
-        <textarea name="comentarios-adicionales" placeholder="Tus comentarios nos ayudarán a comprender mejor los factores que influyen en el rendimiento académico..."></textarea>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 8: DATOS DE CONTACTO -->
-    <div class="section">
-      <h2>Datos de Contacto (Opcional)</h2>
-      
-      <div class="question">
-        <strong>Correo electrónico (para recibir resultados del estudio)</strong>
-        <input type="email" name="email" placeholder="ejemplo@correo.com">
-      </div>
-    </div>
-
-    <button type="submit">Enviar Encuesta</button>
-  </form>
-
-  <script>
-    // Mostrar/ocultar preguntas de recursamiento
-    document.querySelectorAll('input[name="recursado"]').forEach(function(radio) {
-      radio.addEventListener('change', function() {
-        const recursadoInfo = document.querySelectorAll('.recursado-info');
-        if (this.value === 'si') {
-          recursadoInfo.forEach(div => div.style.display = 'block');
-        } else {
-          recursadoInfo.forEach(div => div.style.display = 'none');
-        }
-      });
-    });
-
-    // Actualizar barra de progreso
-    const form = document.getElementById('academicSurvey');
-    const progress = document.getElementById('progress');
-    const requiredInputs = form.querySelectorAll('input[required], select[required], textarea[required]');
-    const totalRequired = requiredInputs.length;
+        
+        <h2>Relación con el rendimiento académico</h2>
+        
+        <div class="form-group">
+            <label class="required">1. ¿Cuál fue tu promedio general en el último semestre (aproximado)?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="promedio_menos60" name="promedio" value="Menor a 60%" required>
+                    <label for="promedio_menos60">Menor a 60%</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="promedio_60_70" name="promedio" value="60% - 70%">
+                    <label for="promedio_60_70">60% - 70%</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="promedio_71_80" name="promedio" value="71% - 80%">
+                    <label for="promedio_71_80">71% - 80%</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="promedio_81_90" name="promedio" value="81% - 90%">
+                    <label for="promedio_81_90">81% - 90%</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="promedio_mas90" name="promedio" value="Mayor a 90%">
+                    <label for="promedio_mas90">Mayor a 90%</label>
+                </div>
+            </div>
+            <div id="promedio-error" class="error">Por favor selecciona una opción</div>
+        </div>
+        
+        <div class="form-group">
+            <label class="required">2. ¿Consideras que el método de estudio que usas influye directamente en tu rendimiento académico?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="influencia_si" name="influencia" value="Sí" required>
+                    <label for="influencia_si">Sí</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="influencia_no" name="influencia" value="No">
+                    <label for="influencia_no">No</label>
+                </div>
+            </div>
+            <div id="influencia-error" class="error">Por favor selecciona una opción</div>
+            <div>
+                <label for="explicacion_influencia" class="required">Explica brevemente tu respuesta:</label>
+                <textarea id="explicacion_influencia" name="explicacion_influencia" required></textarea>
+                <div id="explicacion_influencia-error" class="error">Por favor explica tu respuesta</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="required">3. ¿Estarías dispuesto/a a cambiar tu método de estudio si supieras que otro es más efectivo?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="disposicion_si" name="disposicion" value="Sí" required>
+                    <label for="disposicion_si">Sí</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="disposicion_no" name="disposicion" value="No">
+                    <label for="disposicion_no">No</label>
+                </div>
+            </div>
+            <div id="disposicion-error" class="error">Por favor selecciona una opción</div>
+            <div>
+                <label for="explicacion_disposicion" class="required">¿Por qué?</label>
+                <textarea id="explicacion_disposicion" name="explicacion_disposicion" required></textarea>
+                <div id="explicacion_disposicion-error" class="error">Por favor explica tu respuesta</div>
+            </div>
+        </div>
+        
+        <div id="loading">Enviando datos, por favor espera...</div>
+        
+        <button type="submit" id="submitBtn">Enviar Encuesta</button>
+    </form>
     
-    function updateProgress() {
-      let completed = 0;
-      requiredInputs.forEach(input => {
-        if (input.type === 'radio') {
-          const name = input.name;
-          const radioGroup = form.querySelectorAll(`input[name="${name}"]:checked`);
-          if (radioGroup.length > 0) {
-            completed++;
-          }
-        } else if (input.type === 'checkbox') {
-          const name = input.name;
-          const checkboxes = form.querySelectorAll(`input[name="${name}"]:checked`);
-          if (checkboxes.length > 0) {
-            completed++;
-          }
-        } else {
-          if (input.value.trim() !== '') {
-            completed++;
-          }
-        }
-      });
-      
-      const uniqueNames = new Set();
-      requiredInputs.forEach(input => uniqueNames.add(input.name));
-      const totalUniqueRequired = uniqueNames.size;
-      
-      const percent = Math.round((completed / totalUniqueRequired) * 100);
-      progress.style.width = percent + '%';
-    }
-    
-    form.addEventListener('change', updateProgress);
-    form.addEventListener('input', updateProgress);
-    
-    // Validación antes de enviar
-    form.addEventListener('submit', function(e) {
-      let isValid = true;
-      const requiredFields = form.querySelectorAll('[required]');
-      
-      requiredFields.forEach(field => {
-        if (field.type === 'radio' || field.type === 'checkbox') {
-          const name = field.name;
-          const checked = form.querySelectorAll(`input[name="${name}"]:checked`).length > 0;
-          if (!checked) {
-            isValid = false;
-            field.closest('.question').style.borderLeft = '3px solid red';
-          } else {
-            field.closest('.question').style.borderLeft = '';
-          }
-        } else if (!field.value.trim()) {
-          isValid = false;
-          field.style.borderColor = 'red';
-        } else {
-          field.style.borderColor = '';
-        }
-      });
-      
-      if (!isValid) {
-        e.preventDefault();
-        alert('Por favor completa todos los campos requeridos marcados con *.');
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
+    <div id="successMessage" class="success-message">
+        ¡Gracias por completar la encuesta! Los datos han sido enviados correctamente.
+    </div>
+
+    <script>
+        // Configuración del correo de destino
+        const DESTINATION_EMAIL = "alderdelgado412@gmail.com";
+        
+        // Cuando el documento está listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar/ocultar campo "Otros" en dificultades
+            document.getElementById('dificultad_otros').addEventListener('change', function() {
+                document.getElementById('otros_dificultades_container').style.display = 
+                    this.checked ? 'block' : 'none';
+            });
+            
+            // Mostrar/ocultar campo para razón de cambio de método
+            document.querySelectorAll('input[name="cambio_metodo"]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    document.getElementById('razon_cambio_container').style.display = 
+                        (this.value === 'Sí') ? 'block' : 'none';
+                });
+            });
+            
+            // Manejar el envío del formulario
+            document.getElementById('studyMethodsForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validar el formulario
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Obtener los datos del formulario
+                const formData = new FormData(this);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    // Para checkboxes con múltiples selecciones
+                    if (formObject[key]) {
+                        if (!Array.isArray(formObject[key])) {
+                            formObject[key] = [formObject[key]];
+                        }
+                        formObject[key].push(value);
+                    } else {
+                        formObject[key] = value;
+                    }
+                });
+                
+                // Mostrar loading
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('submitBtn').style.display = 'none';
+                
+                // Enviar los datos usando Formspree
+                fetch("https://formspree.io/f/" + DESTINATION_EMAIL, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObject),
+                    mode: 'no-cors'
+                })
+                .then(() => {
+                    // Mostrar mensaje de éxito
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('studyMethodsForm').reset();
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    // Scroll al mensaje de éxito
+                    document.getElementById('successMessage').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un error al enviar la encuesta. Por favor inténtalo de nuevo.');
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('submitBtn').style.display = 'block';
+                });
+            });
         });
-      } else {
-        // Mostrar mensaje de enviando
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-      }
-    });
-  </script>
+        
+        // Función para validar el formulario
+        function validateForm() {
+            let isValid = true;
+            
+            // Validar nombre
+            const nombre = document.getElementById('nombre').value.trim();
+            if (nombre === '') {
+                document.getElementById('nombre-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('nombre-error').style.display = 'none';
+            }
+            
+            // Validar email
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('email-error').style.display = 'none';
+            }
+            
+            // Validar efectividad
+            const efectividad = document.querySelector('input[name="efectividad"]:checked');
+            if (!efectividad) {
+                document.getElementById('efectividad-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('efectividad-error').style.display = 'none';
+            }
+            
+            // Validar métodos efectivos
+            const metodosEfectivos = document.getElementById('metodos_efectivos').value.trim();
+            if (metodosEfectivos === '') {
+                document.getElementById('metodos_efectivos-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('metodos_efectivos-error').style.display = 'none';
+            }
+            
+            // Validar dificultades
+            const dificultades = document.querySelectorAll('input[name="dificultades"]:checked');
+            if (dificultades.length === 0) {
+                document.getElementById('dificultades-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('dificultades-error').style.display = 'none';
+            }
+            
+            // Validar cambio de método
+            const cambioMetodo = document.querySelector('input[name="cambio_metodo"]:checked');
+            if (!cambioMetodo) {
+                document.getElementById('cambio_metodo-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('cambio_metodo-error').style.display = 'none';
+            }
+            
+            // Validar promedio
+            const promedio = document.querySelector('input[name="promedio"]:checked');
+            if (!promedio) {
+                document.getElementById('promedio-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('promedio-error').style.display = 'none';
+            }
+            
+            // Validar influencia
+            const influencia = document.querySelector('input[name="influencia"]:checked');
+            if (!influencia) {
+                document.getElementById('influencia-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('influencia-error').style.display = 'none';
+            }
+            
+            // Validar explicación influencia
+            const explicacionInfluencia = document.getElementById('explicacion_influencia').value.trim();
+            if (explicacionInfluencia === '') {
+                document.getElementById('explicacion_influencia-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('explicacion_influencia-error').style.display = 'none';
+            }
+            
+            // Validar disposición
+            const disposicion = document.querySelector('input[name="disposicion"]:checked');
+            if (!disposicion) {
+                document.getElementById('disposicion-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('disposicion-error').style.display = 'none';
+            }
+            
+            // Validar explicación disposición
+            const explicacionDisposicion = document.getElementById('explicacion_disposicion').value.trim();
+            if (explicacionDisposicion === '') {
+                document.getElementById('explicacion_disposicion-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('explicacion_disposicion-error').style.display = 'none';
+            }
+            
+            return isValid;
+        }
+    </script>
 </body>
 </html>
