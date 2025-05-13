@@ -1,244 +1,1446 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¡Felicitaciones Futuro Médico!</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
-    
-    :root {
-      --primary: #005b96;
-      --secondary: #00a1e0;
-      --accent: #ff6b6b;
-      --light: #f8f9fa;
-      --dark: #212529;
-    }
-    
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: var(--dark);
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-    }
-    
-    .confetti-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-    
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      opacity: 0;
-      animation: confetti-fall 10s linear infinite;
-    }
-    
-    @keyframes confetti-fall {
-      0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-    
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--secondary);
-      margin-bottom: 30px;
-    }
-    
-    .message-box {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
-      border-left: 5px solid var(--accent);
-    }
-    
-    p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    
-    .highlight {
-      font-weight: bold;
-      color: var(--primary);
-    }
-    
-    .emoji {
-      font-size: 1.5rem;
-    }
-    
-    .medical-icons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 40px 0;
-      flex-wrap: wrap;
-    }
-    
-    .medical-icon {
-      font-size: 2.5rem;
-      color: var(--secondary);
-    }
-    
-    .motivation-box {
-      background-color: var(--primary);
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 30px;
-    }
-    
-    .motivation-text {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin: 0;
-    }
-    
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      color: var(--secondary);
-      font-size: 0.9rem;
-    }
-    
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-      
-      .container {
-        padding: 20px 15px;
-      }
-      
-      .message-box {
-        padding: 20px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="confetti-container" id="confetti-container"></div>
-  
-  <div class="container">
-    <header>
-      <h1>¡Felicidades Futuro Médico!</h1>
-      <div class="subtitle">Tu camino en la medicina es inspirador</div>
-    </header>
-    
-    <div class="message-box">
-      <p>Estás a solo <span class="highlight">10 años</span> de terminar la carrera de medicina... <span class="emoji">😅</span></p>
-      <p>Perdón, quería decir...</p>
-      <p><span class="highlight">¡Fuerza! Tú puedes</span> <span class="emoji">💪</span></p>
-      <p>Ya superaste lo más difícil, pero aún te esperan:</p>
-      <ul style="text-align: left; padding-left: 20px;">
-        <li>5 años más de carrera</li>
-        <li>La CONAREM y la especialidad</li>
-        <li>La subespecialidad (opcional pero tentadora)</li>
-        <li>Y toda una vida de aprendizaje continuo</li>
-      </ul>
-    </div>
-    
-    <div class="medical-icons">
-      <div class="medical-icon">🩺</div>
-      <div class="medical-icon">💊</div>
-      <div class="medical-icon">🏥</div>
-      <div class="medical-icon">🧪</div>
-      <div class="medical-icon">🧠</div>
-    </div>
-    
-    <div class="motivation-box">
-      <p class="motivation-text">Recuerda: Cada gran médico empezó donde tú estás ahora. ¡Persiste!</p>
-    </div>
-    
-    <footer>
-      <p>El mundo necesita más profesionales como tú. ¡No te rindas!</p>
-    </footer>
-  </div>
-
-  <script>
-    // Crear confeti
-    function createConfetti() {
-      const colors = ['#005b96', '#00a1e0', '#ff6b6b', '#4CAF50', '#FFC107', '#9C27B0'];
-      const container = document.getElementById('confetti-container');
-      
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediQuiz - El Desafío Médico</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
-        // Posición aleatoria
-        confetti.style.left = Math.random() * 100 + 'vw';
-        
-        // Tamaño aleatorio
-        const size = Math.random() * 10 + 5;
-        confetti.style.width = size + 'px';
-        confetti.style.height = size + 'px';
-        
-        // Color aleatorio
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        
-        // Forma aleatoria (círculo o cuadrado)
-        if (Math.random() > 0.5) {
-          confetti.style.borderRadius = '50%';
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
-        // Animación con duración aleatoria
-        confetti.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        confetti.style.animationDelay = Math.random() * 5 + 's';
+        body {
+            background-color: #0a0a2a;
+            font-family: 'Press Start 2P', cursive;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
         
-        container.appendChild(confetti);
-      }
-    }
-    
-    // Llamar a la función cuando la página se carga
-    window.onload = createConfetti;
-    
-    // Agregar más confeti periódicamente
-    setInterval(() => {
-      const container = document.getElementById('confetti-container');
-      if (container.children.length < 150) {
-        createConfetti();
-      }
-    }, 3000);
-  </script>
+        #game-container {
+            width: 800px;
+            height: 600px;
+            background-color: #1a1a3a;
+            border: 4px solid #4a4a8a;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+        }
+        
+        #game-screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 30% 60%, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 55% 35%, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+        
+        #start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            height: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+        
+        #gender-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .gender-btn {
+            background-color: #5dade2;
+            color: #0a0a2a;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 5px 5px 0 #0a0a2a;
+            transition: all 0.2s;
+            width: 200px;
+        }
+        
+        .gender-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 10px 0 #0a0a2a;
+        }
+        
+        #title {
+            color: #5dade2;
+            font-size: 32px;
+            text-shadow: 3px 3px 0 #0a0a2a, 
+                        -3px -3px 0 #0a0a2a,
+                        3px -3px 0 #0a0a2a,
+                        -3px 3px 0 #0a0a2a;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        #start-button, #restart-button {
+            background-color: #5dade2;
+            color: #0a0a2a;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 5px 5px 0 #0a0a2a;
+            transition: all 0.2s;
+        }
+        
+        #start-button:hover, #restart-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 10px 0 #0a0a2a;
+        }
+        
+        #start-button:active, #restart-button:active {
+            transform: translateY(0);
+            box-shadow: 0 0 0 #0a0a2a;
+        }
+        
+        #hud {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+        }
+        
+        #score-container, #lives-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #score, #lives {
+            color: #5dade2;
+        }
+        
+        #question-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #4a4a8a;
+            border-radius: 10px;
+            padding: 20px;
+            width: 90%;
+            max-height: 250px;
+            overflow-y: auto;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        #answers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 90%;
+        }
+        
+        .answer-btn {
+            background-color: rgba(74, 74, 138, 0.7);
+            color: white;
+            border: 2px solid #4a4a8a;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .answer-btn:hover {
+            background-color: rgba(93, 173, 226, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .answer-btn.correct {
+            background-color: rgba(46, 204, 113, 0.7);
+            border-color: #2ecc71;
+        }
+        
+        .answer-btn.incorrect {
+            background-color: rgba(231, 76, 60, 0.7);
+            border-color: #e74c3c;
+        }
+        
+        #character {
+            width: 64px;
+            height: 64px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect x="16" y="8" width="32" height="48" fill="%23FFFFFF"/><rect x="24" y="16" width="16" height="16" fill="%235DADE2"/><rect x="24" y="40" width="16" height="8" fill="%235DADE2"/><rect x="16" y="24" width="8" height="8" fill="%235DADE2"/><rect x="40" y="24" width="8" height="8" fill="%235DADE2"/></svg>');
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 3s infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+        
+        /* Animaciones para la pantalla de Game Over */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .celebrate {
+            animation: celebrate 0.5s infinite;
+        }
+        
+        /* Efecto de confeti para puntuaciones altas */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f1c40f;
+            opacity: 0.8;
+            animation: confetti-fall 4s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+        }
+        
+        #game-over-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            height: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+        
+        #final-score-title {
+            color: #e74c3c;
+            font-size: 24px;
+            text-shadow: 2px 2px 0 #0a0a2a;
+        }
+        
+        #final-score {
+            color: #5dade2;
+            font-size: 60px;
+            margin: 10px 0;
+            text-shadow: 3px 3px 0 #0a0a2a;
+            animation: pulse 1.5s infinite;
+        }
+        
+        #sarcastic-message {
+            color: #f1c40f;
+            font-size: 20px;
+            max-width: 80%;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 0 #0a0a2a;
+        }
+        
+        #result-image {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 15px;
+            image-rendering: pixelated;
+        }
+        
+        .pixel-effect {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        
+        /* Elementos médicos flotantes */
+        .floating-item {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.2;
+            animation: floating-animation 15s infinite linear;
+        }
+        
+        @keyframes floating-animation {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        #pill1 {
+            width: 30px;
+            height: 15px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            top: 15%;
+            left: 15%;
+            animation-duration: 20s;
+        }
+        
+        #pill2 {
+            width: 30px;
+            height: 15px;
+            background-color: #3498db;
+            border-radius: 50%;
+            top: 75%;
+            left: 80%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+        
+        #stethoscope {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #2ecc71;
+            border-radius: 50%;
+            top: 30%;
+            left: 85%;
+            animation-duration: 25s;
+        }
+        
+        #syringe {
+            width: 10px;
+            height: 40px;
+            background-color: #f1c40f;
+            top: 65%;
+            left: 10%;
+            animation-duration: 22s;
+            animation-delay: 1s;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Elementos médicos flotantes -->
+        <div id="pill1" class="floating-item"></div>
+        <div id="pill2" class="floating-item"></div>
+        <div id="stethoscope" class="floating-item"></div>
+        <div id="syringe" class="floating-item"></div>
+        
+        <!-- Pantalla de inicio -->
+        <div id="start-screen">
+            <h1 id="title">MediQuiz</h1>
+            <p>¡Pon a prueba tus conocimientos médicos!</p>
+            <div id="gender-selection">
+                <p>Selecciona tu género:</p>
+                <button id="male-btn" class="gender-btn">HOMBRE</button>
+                <button id="female-btn" class="gender-btn">MUJER</button>
+            </div>
+            <button id="start-button" class="hidden">INICIAR</button>
+        </div>
+        
+        <!-- Pantalla principal del juego -->
+        <div id="game-screen" class="hidden">
+            <div id="hud">
+                <div id="score-container">
+                    <span>PUNTAJE:</span>
+                    <span id="score">0</span>
+                </div>
+                <div id="lives-container">
+                    <span>VIDAS:</span>
+                    <span id="lives">3</span>
+                </div>
+            </div>
+            
+            <div id="question-container">
+                ¿Listo para demostrar tus conocimientos médicos?
+            </div>
+            
+            <div id="answers-container">
+                <button class="answer-btn">Respuesta 1</button>
+                <button class="answer-btn">Respuesta 2</button>
+                <button class="answer-btn">Respuesta 3</button>
+                <button class="answer-btn">Respuesta 4</button>
+            </div>
+            
+            <div id="character" class="pixel-effect"></div>
+        </div>
+        
+        <!-- Pantalla de game over -->
+        <div id="game-over-screen">
+            <h2 id="final-score-title">CALIFICACIÓN FINAL</h2>
+            <p id="final-score">0%</p>
+            <div id="result-image"></div>
+            <p id="sarcastic-message">¿En serio estudiaste para esto?</p>
+            <button id="restart-button">VOLVER A INTENTAR</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables del juego
+        let score = 0;
+        let lives = 3;
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let isFemale = false;
+        let currentQuestions = [];
+        
+        // Referencias a elementos del DOM
+        const startScreen = document.getElementById('start-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const startButton = document.getElementById('start-button');
+        const restartButton = document.getElementById('restart-button');
+        const questionContainer = document.getElementById('question-container');
+        const answersContainer = document.getElementById('answers-container');
+        const answerButtons = document.querySelectorAll('.answer-btn');
+        const scoreDisplay = document.getElementById('score');
+        const livesDisplay = document.getElementById('lives');
+        const finalScoreDisplay = document.getElementById('final-score');
+        const sarcasticMessageDisplay = document.getElementById('sarcastic-message');
+        const maleBtn = document.getElementById('male-btn');
+        const femaleBtn = document.getElementById('female-btn');
+        const genderSelection = document.getElementById('gender-selection');
+        
+        // Banco de preguntas médicas fáciles (para hombres)
+        const easyQuestions = [
+            {
+                question: "¿Cuál es el hueso más largo del cuerpo humano?",
+                answers: [
+                    "Fémur",
+                    "Húmero",
+                    "Tibia",
+                    "Radio"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué hormona es conocida como la 'hormona del estrés'?",
+                answers: [
+                    "Insulina",
+                    "Adrenalina",
+                    "Cortisol",
+                    "Testosterona"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué parte del cerebro es responsable del equilibrio y la coordinación motora?",
+                answers: [
+                    "Cerebelo",
+                    "Tálamo",
+                    "Hipotálamo",
+                    "Lóbulo frontal"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Cuál de los siguientes órganos forma parte del sistema linfático?",
+                answers: [
+                    "Páncreas",
+                    "Vesícula biliar",
+                    "Bazo",
+                    "Apéndice"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Cuál es la función principal de los glóbulos rojos?",
+                answers: [
+                    "Combatir infecciones",
+                    "Transportar oxígeno",
+                    "Producir anticuerpos",
+                    "Coagular la sangre"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Cuál es el nombre de la arteria principal que sale del corazón?",
+                answers: [
+                    "Arteria pulmonar",
+                    "Arteria renal",
+                    "Arteria aorta",
+                    "Arteria femoral"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué hormona regula los niveles de glucosa en la sangre?",
+                answers: [
+                    "Insulina",
+                    "Tiroxina",
+                    "Adrenalina",
+                    "Estrógeno"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Cuál es la principal función del sistema linfático?",
+                answers: [
+                    "Digestión de alimentos",
+                    "Transportar oxígeno",
+                    "Defensa inmunológica",
+                    "Regular la temperatura corporal"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué vitamina se produce en la piel cuando nos exponemos al sol?",
+                answers: [
+                    "Vitamina A",
+                    "Vitamina C",
+                    "Vitamina D",
+                    "Vitamina E"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Cuál es el nombre del pigmento que da color a la piel?",
+                answers: [
+                    "Melanina",
+                    "Queratina",
+                    "Elastina",
+                    "Colágeno"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Cómo se llama el proceso de formación de orina en los riñones?",
+                answers: [
+                    "Filtración glomerular",
+                    "Secreción tubular",
+                    "Diuresis",
+                    "Nefrona"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Cuál de las siguientes NO es una capa del ojo?",
+                answers: [
+                    "Esclerótica",
+                    "Coroides",
+                    "Retina",
+                    "Cristalino"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "¿Qué estructura del oído es responsable del equilibrio?",
+                answers: [
+                    "Cóclea",
+                    "Vestíbulo",
+                    "Tímpano",
+                    "Martillo"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Cuál es la principal célula del sistema nervioso?",
+                answers: [
+                    "Neurona",
+                    "Eritrocito",
+                    "Hepatocito",
+                    "Osteocito"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué enzima digestiva se encuentra en la saliva?",
+                answers: [
+                    "Pepsina",
+                    "Amilasa",
+                    "Lipasa",
+                    "Tripsina"
+                ],
+                correctAnswer: 1
+            },
+            // 20 preguntas adicionales fáciles
+            {
+                question: "¿Qué órgano produce la bilis?",
+                answers: [
+                    "Hígado",
+                    "Páncreas",
+                    "Estómago",
+                    "Bazo"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Cuál es la presión arterial normal en adultos?",
+                answers: [
+                    "120/80 mmHg",
+                    "140/90 mmHg",
+                    "100/60 mmHg",
+                    "160/100 mmHg"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué tipo de sangre es el donante universal?",
+                answers: [
+                    "A positivo",
+                    "B negativo",
+                    "AB positivo",
+                    "O negativo"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "¿Cuál es la frecuencia cardíaca normal en reposo para un adulto?",
+                answers: [
+                    "30-50 lpm",
+                    "60-100 lpm",
+                    "110-140 lpm",
+                    "150-180 lpm"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué vitamina ayuda a la coagulación de la sangre?",
+                answers: [
+                    "Vitamina A",
+                    "Vitamina C",
+                    "Vitamina D",
+                    "Vitamina K"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "¿Qué parte del sistema respiratorio contiene las cuerdas vocales?",
+                answers: [
+                    "Tráquea",
+                    "Bronquios",
+                    "Laringe",
+                    "Faringe"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué tipo de célula sanguínea combate las infecciones?",
+                answers: [
+                    "Glóbulos rojos",
+                    "Glóbulos blancos",
+                    "Plaquetas",
+                    "Hemoglobina"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué hueso protege el cerebro?",
+                answers: [
+                    "Mandíbula",
+                    "Clavícula",
+                    "Cráneo",
+                    "Esternón"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué órgano es responsable de bombear sangre por todo el cuerpo?",
+                answers: [
+                    "Pulmones",
+                    "Corazón",
+                    "Riñones",
+                    "Hígado"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué parte del intestino absorbe la mayoría de los nutrientes?",
+                answers: [
+                    "Intestino delgado",
+                    "Intestino grueso",
+                    "Estómago",
+                    "Esófago"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué glándula controla el metabolismo?",
+                answers: [
+                    "Pituitaria",
+                    "Tiroides",
+                    "Suprarrenal",
+                    "Pineal"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué enfermedad se caracteriza por niveles altos de glucosa en sangre?",
+                answers: [
+                    "Hipertensión",
+                    "Diabetes",
+                    "Anemia",
+                    "Artritis"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué mineral es esencial para la formación de huesos fuertes?",
+                answers: [
+                    "Hierro",
+                    "Calcio",
+                    "Sodio",
+                    "Potasio"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué parte del ojo controla la cantidad de luz que entra?",
+                answers: [
+                    "Retina",
+                    "Córnea",
+                    "Pupila",
+                    "Cristalino"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué enfermedad se transmite por la picadura de un mosquito?",
+                answers: [
+                    "Malaria",
+                    "Tuberculosis",
+                    "Hepatitis",
+                    "Neumonía"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué órgano filtra la sangre y produce orina?",
+                answers: [
+                    "Hígado",
+                    "Páncreas",
+                    "Riñones",
+                    "Bazo"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué vitamina previene el escorbuto?",
+                answers: [
+                    "Vitamina A",
+                    "Vitamina B12",
+                    "Vitamina C",
+                    "Vitamina D"
+                ],
+                correctAnswer: 2
+            }
+        ];
+        
+        // Banco de preguntas médicas difíciles (para mujeres)
+        const hardQuestions = [
+            {
+                question: "¿Qué enzima es responsable de la conversión de fibrinógeno en fibrina durante la coagulación?",
+                answers: [
+                    "Trombina",
+                    "Tromboplastina",
+                    "Plasmina",
+                    "Heparina"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué estructura anatómica separa el lóbulo frontal del lóbulo parietal?",
+                answers: [
+                    "Cisura de Silvio",
+                    "Cisura de Rolando",
+                    "Cisura calcarina",
+                    "Cisura parietooccipital"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué tipo de receptor es el responsable de detectar cambios en la presión arterial en el arco aórtico?",
+                answers: [
+                    "Quimiorreceptores",
+                    "Barorreceptores",
+                    "Mecanorreceptores",
+                    "Termorreceptores"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué hormona es secretada por las células delta del páncreas?",
+                answers: [
+                    "Insulina",
+                    "Glucagón",
+                    "Somatostatina",
+                    "Polipéptido pancreático"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué nervio craneal inerva el músculo oblicuo superior del ojo?",
+                answers: [
+                    "Nervio oculomotor (III)",
+                    "Nervio troclear (IV)",
+                    "Nervio abducens (VI)",
+                    "Nervio facial (VII)"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿En qué parte del riñón se encuentran los podocitos?",
+                answers: [
+                    "Túbulo contorneado proximal",
+                    "Asa de Henle",
+                    "Cápsula de Bowman",
+                    "Túbulo colector"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué tipo de inmunoglobulina es la más abundante en las secreciones mucosas?",
+                answers: [
+                    "IgA",
+                    "IgG",
+                    "IgM",
+                    "IgE"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué estructura embrionaria da origen a la médula suprarrenal?",
+                answers: [
+                    "Endodermo",
+                    "Mesodermo",
+                    "Ectodermo",
+                    "Cresta neural"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "¿Qué enzima del ciclo de Krebs es inhibida por el ATP?",
+                answers: [
+                    "Citrato sintasa",
+                    "Isocitrato deshidrogenasa",
+                    "α-cetoglutarato deshidrogenasa",
+                    "Succinato deshidrogenasa"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué tipo de canal iónico es responsable del potencial de reposo en las neuronas?",
+                answers: [
+                    "Canales de sodio voltaje-dependientes",
+                    "Canales de potasio voltaje-dependientes",
+                    "Canales de potasio con fugas",
+                    "Canales de calcio voltaje-dependientes"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué proteína es la principal responsable de la contracción muscular?",
+                answers: [
+                    "Actina",
+                    "Miosina",
+                    "Troponina",
+                    "Distrofina"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué estructura del corazón conduce el impulso eléctrico desde el nodo AV hasta los ventrículos?",
+                answers: [
+                    "Nodo sinusal",
+                    "Fascículo de Bachmann",
+                    "Haz de His",
+                    "Fibras de Purkinje"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué tipo de hipersensibilidad es la responsable de la enfermedad celíaca?",
+                answers: [
+                    "Tipo I",
+                    "Tipo II",
+                    "Tipo III",
+                    "Tipo IV"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "¿Qué enzima convierte el angiotensinógeno en angiotensina I?",
+                answers: [
+                    "ECA (enzima convertidora de angiotensina)",
+                    "Renina",
+                    "Aldosterona sintasa",
+                    "Catepsina D"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué tipo de colágeno es el más abundante en el hueso?",
+                answers: [
+                    "Tipo I",
+                    "Tipo II",
+                    "Tipo III",
+                    "Tipo IV"
+                ],
+                correctAnswer: 0
+            },
+            // 20 preguntas adicionales difíciles
+            {
+                question: "¿Qué proteína es marcadora de daño miocárdico?",
+                answers: [
+                    "Creatina quinasa",
+                    "Troponina I",
+                    "Mioglobina",
+                    "Lactato deshidrogenasa"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué vía metabólica produce NADPH para la biosíntesis de lípidos?",
+                answers: [
+                    "Glucólisis",
+                    "Ciclo de Krebs",
+                    "Vía de las pentosas fosfato",
+                    "Gluconeogénesis"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué tipo de mutación causa la anemia de células falciformes?",
+                answers: [
+                    "Mutación sin sentido",
+                    "Mutación sin cambio",
+                    "Mutación de cambio de marco",
+                    "Mutación por desplazamiento"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué estructura del oído interno contiene la endolinfa?",
+                answers: [
+                    "Rampa vestibular",
+                    "Rampa timpánica",
+                    "Membrana basilar",
+                    "Cóclea"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué hormona estimula la producción de leche en las glándulas mamarias?",
+                answers: [
+                    "Prolactina",
+                    "Oxitocina",
+                    "Progesterona",
+                    "Estradiol"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué tipo de célula produce el factor intrínseco en el estómago?",
+                answers: [
+                    "Células principales",
+                    "Células parietales",
+                    "Células mucosas",
+                    "Células G"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué enzima es deficiente en la enfermedad de Gaucher?",
+                answers: [
+                    "Hexosaminidasa A",
+                    "Glucocerebrosidasa",
+                    "Galactocerebrosidasa",
+                    "Esfingomielinasa"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué tipo de receptor es el receptor de acetilcolina nicotínico?",
+                answers: [
+                    "Receptor acoplado a proteína G",
+                    "Receptor ionotrópico",
+                    "Receptor tirosina quinasa",
+                    "Receptor nuclear"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué estructura del embrión da origen al sistema nervioso central?",
+                answers: [
+                    "Notocorda",
+                    "Placa neural",
+                    "Cresta neural",
+                    "Somitas"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué tipo de transporte es utilizado por la bomba Na+/K+ ATPasa?",
+                answers: [
+                    "Transporte activo primario",
+                    "Transporte activo secundario",
+                    "Difusión facilitada",
+                    "Transporte pasivo"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué enzima es responsable de la síntesis de cAMP a partir de ATP?",
+                answers: [
+                    "Adenilato ciclasa",
+                    "Fosfodiesterasa",
+                    "Proteína quinasa A",
+                    "Fosfolipasa C"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué tipo de célula produce mielina en el sistema nervioso central?",
+                answers: [
+                    "Astrocitos",
+                    "Microglía",
+                    "Oligodendrocitos",
+                    "Células de Schwann"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué estructura del riñón es impermeable al agua?",
+                answers: [
+                    "Túbulo contorneado proximal",
+                    "Asa de Henle descendente",
+                    "Asa de Henle ascendente",
+                    "Túbulo colector"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué tipo de interferón es producido principalmente por leucocitos?",
+                answers: [
+                    "Interferón alfa",
+                    "Interferón beta",
+                    "Interferón gamma",
+                    "Interferón lambda"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué proteína es responsable de la unión del calcio en el músculo esquelético?",
+                answers: [
+                    "Troponina",
+                    "Tropomiosina",
+                    "Calmodulina",
+                    "Calsequestrina"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "¿Qué tipo de canal iónico es activado por el GABA en las sinapsis inhibitorias?",
+                answers: [
+                    "Canales de sodio",
+                    "Canales de potasio",
+                    "Canales de cloro",
+                    "Canales de calcio"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "¿Qué enzima es deficiente en la fenilcetonuria?",
+                answers: [
+                    "Fenilalanina hidroxilasa",
+                    "Tirosinasa",
+                    "Homogentisato oxidasa",
+                    "Dihidropteridina reductasa"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "¿Qué tipo de colágeno forma las fibrillas de anclaje en la membrana basal?",
+                answers: [
+                    "Tipo IV",
+                    "Tipo VII",
+                    "Tipo XVII",
+                    "Tipo XVIII"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué estructura del cromosoma contiene ADN satélite?",
+                answers: [
+                    "Telómero",
+                    "Centrómero",
+                    "Brazo corto",
+                    "Brazo largo"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "¿Qué tipo de célula es la principal presentadora de antígenos en la piel?",
+                answers: [
+                    "Células de Langerhans",
+                    "Células de Merkel",
+                    "Queratinocitos",
+                    "Melanocitos"
+                ],
+                correctAnswer: 0
+            }
+        ];
+        
+        // Mensajes sarcásticos según la puntuación
+        const sarcasticMessages = [
+            { 
+                range: [0, 10], 
+                message: "¿Estás seguro de que viniste al examen y no al recreo?",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#e74c3c"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <path d="M30 70 Q50 55 70 70" stroke="#fff" stroke-width="5" fill="none"/>
+                    <line x1="25" y1="30" x2="35" y2="40" stroke="#fff" stroke-width="3"/>
+                    <line x1="35" y1="30" x2="25" y2="40" stroke="#fff" stroke-width="3"/>
+                    <line x1="65" y1="30" x2="75" y2="40" stroke="#fff" stroke-width="3"/>
+                    <line x1="75" y1="30" x2="65" y2="40" stroke="#fff" stroke-width="3"/>
+                </svg>`
+            },
+            { 
+                range: [11, 30], 
+                message: "¡Wow! ¡Al menos no fue un cero redondo... pero casi!",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#e67e22"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <path d="M30 70 Q50 65 70 70" stroke="#fff" stroke-width="5" fill="none"/>
+                    <line x1="25" y1="25" x2="35" y2="35" stroke="#fff" stroke-width="3"/>
+                    <line x1="65" y1="25" x2="75" y2="35" stroke="#fff" stroke-width="3"/>
+                </svg>`
+            },
+            { 
+                range: [31, 50], 
+                message: "Tu conocimiento está en modo avión.",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#f1c40f"/>
+                    <circle cx="30" cy="40" r="6" fill="#fff"/>
+                    <circle cx="70" cy="40" r="6" fill="#fff"/>
+                    <line x1="30" y1="65" x2="70" y2="65" stroke="#fff" stroke-width="5"/>
+                    <line x1="20" y1="20" x2="40" y2="40" stroke="#fff" stroke-width="3"/>
+                    <line x1="60" y1="20" x2="80" y2="40" stroke="#fff" stroke-width="3"/>
+                </svg>`
+            },
+            { 
+                range: [51, 60], 
+                message: "¡Cerca! Como cuando estudiaste el resumen... del resumen.",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#f39c12"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <circle cx="30" cy="40" r="3" fill="#000"/>
+                    <circle cx="70" cy="40" r="3" fill="#000"/>
+                    <path d="M35 65 Q50 60 65 65" stroke="#fff" stroke-width="5" fill="none"/>
+                </svg>`
+            },
+            { 
+                range: [61, 70], 
+                message: "Aceptable… si el examen fuera de memes.",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#3498db"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <circle cx="30" cy="40" r="3" fill="#000"/>
+                    <circle cx="70" cy="40" r="3" fill="#000"/>
+                    <path d="M30 65 Q50 75 70 65" stroke="#fff" stroke-width="5" fill="none"/>
+                </svg>`
+            },
+            { 
+                range: [71, 80], 
+                message: "Pasaste raspando. Como un gato con suerte.",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#2ecc71"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <circle cx="30" cy="40" r="3" fill="#000"/>
+                    <circle cx="70" cy="40" r="3" fill="#000"/>
+                    <path d="M25 65 Q50 80 75 65" stroke="#fff" stroke-width="5" fill="none"/>
+                    <path d="M50 40 L55 35 M50 40 L45 35" stroke="#000" stroke-width="2" fill="none"/>
+                </svg>`
+            },
+            { 
+                range: [81, 90], 
+                message: "Nada mal, genio de medianoche.",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#9b59b6"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <circle cx="30" cy="40" r="3" fill="#000"/>
+                    <circle cx="70" cy="40" r="3" fill="#000"/>
+                    <path d="M25 65 Q50 85 75 65" stroke="#fff" stroke-width="5" fill="none"/>
+                    <path d="M30 25 L35 15 M65 25 L70 15" stroke="#fff" stroke-width="2" fill="none"/>
+                </svg>`
+            },
+            { 
+                range: [91, 100], 
+                message: "¡Profesor, este crack merece dar la clase!",
+                image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#f1c40f"/>
+                    <circle cx="30" cy="40" r="8" fill="#fff"/>
+                    <circle cx="70" cy="40" r="8" fill="#fff"/>
+                    <circle cx="30" cy="40" r="3" fill="#000"/>
+                    <circle cx="70" cy="40" r="3" fill="#000"/>
+                    <path d="M25 65 Q50 90 75 65" stroke="#fff" stroke-width="5" fill="none"/>
+                    <path d="M25 20 L75 20 L50 5 Z" fill="#e74c3c"/>
+                    <rect x="45" y="5" width="10" height="15" fill="#f39c12"/>
+                </svg>`
+            }
+        ];
+        
+        // Función para seleccionar género
+        function selectGender(female) {
+            isFemale = female;
+            currentQuestions = isFemale ? hardQuestions : easyQuestions;
+            genderSelection.classList.add('hidden');
+            startButton.classList.remove('hidden');
+            
+            // Cambiar el mensaje según el género
+            const title = document.getElementById('title');
+            if (isFemale) {
+                title.textContent = "MediQuiz PRO";
+                title.style.color = "#e91e63";
+                questionContainer.textContent = "¿Lista para el desafío médico avanzado?";
+            } else {
+                title.textContent = "MediQuiz BÁSICO";
+                title.style.color = "#5dade2";
+                questionContainer.textContent = "¿Listo para demostrar tus conocimientos médicos básicos?";
+            }
+        }
+        
+        // Función para iniciar el juego
+        function startGame() {
+            startScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            score = 0;
+            lives = 3;
+            totalQuestions = 0;
+            correctAnswers = 0;
+            updateHUD();
+            showNextQuestion();
+        }
+        
+        // Función para reiniciar el juego
+        function restartGame() {
+            gameOverScreen.style.display = 'none';
+            gameScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            genderSelection.classList.remove('hidden');
+            startButton.classList.add('hidden');
+        }
+        
+        // Función para actualizar el HUD (puntuación y vidas)
+        function updateHUD() {
+            scoreDisplay.textContent = score;
+            livesDisplay.textContent = lives;
+        }
+        
+        // Función para mostrar la siguiente pregunta
+        function showNextQuestion() {
+            // Desactivar temporalmente los botones durante la animación
+            answerButtons.forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+                btn.disabled = false;
+            });
+            
+            // Seleccionar una pregunta aleatoria
+            const randomIndex = Math.floor(Math.random() * currentQuestions.length);
+            const currentQuestion = currentQuestions[randomIndex];
+            
+            // Mostrar la pregunta
+            questionContainer.textContent = currentQuestion.question;
+            
+            // Mostrar las respuestas
+            currentQuestion.answers.forEach((answer, index) => {
+                answerButtons[index].textContent = answer;
+                // Guardar la respuesta correcta como un atributo de datos
+                answerButtons[index].dataset.correct = (index === currentQuestion.correctAnswer);
+            });
+            
+            totalQuestions++;
+        }
+        
+        // Función para verificar la respuesta
+        function checkAnswer(selectedBtn) {
+            // Desactivar todos los botones temporalmente
+            answerButtons.forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            const isCorrect = selectedBtn.dataset.correct === 'true';
+            
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                score += isFemale ? 15 : 10; // Más puntos para preguntas difíciles
+                correctAnswers++;
+                updateHUD();
+                
+                // Sonido de acierto (efecto visual ya que no usamos audio)
+                document.body.style.backgroundColor = '#2ecc71';
+                setTimeout(() => {
+                    document.body.style.backgroundColor = '#0a0a2a';
+                }, 300);
+            } else {
+                selectedBtn.classList.add('incorrect');
+                lives--;
+                updateHUD();
+                
+                // Mostrar la respuesta correcta
+                answerButtons.forEach(btn => {
+                    if (btn.dataset.correct === 'true') {
+                        btn.classList.add('correct');
+                    }
+                });
+                
+                // Sonido de error (efecto visual ya que no usamos audio)
+                document.body.style.backgroundColor = '#e74c3c';
+                setTimeout(() => {
+                    document.body.style.backgroundColor = '#0a0a2a';
+                }, 300);
+                
+                // Verificar si se acabaron las vidas
+                if (lives <= 0) {
+                    setTimeout(gameOver, 1500);
+                    return;
+                }
+            }
+            
+            // Mostrar la siguiente pregunta después de un breve retraso
+            setTimeout(showNextQuestion, 1500);
+        }
+        
+        // Función para terminar el juego
+        function gameOver() {
+            // Calcular el porcentaje final
+            const finalPercentage = Math.round((correctAnswers / totalQuestions) * 100);
+            
+            // Actualizar la pantalla de game over
+            finalScoreDisplay.textContent = finalPercentage + '%';
+            
+            // Seleccionar un mensaje sarcástico según la puntuación
+            let selectedMessage = sarcasticMessages[0].message; // Mensaje por defecto
+            let selectedImage = sarcasticMessages[0].image; // Imagen por defecto
+            
+            for (const messageObj of sarcasticMessages) {
+                const [min, max] = messageObj.range;
+                if (finalPercentage >= min && finalPercentage <= max) {
+                    selectedMessage = messageObj.message;
+                    selectedImage = messageObj.image;
+                    break;
+                }
+            }
+            
+            sarcasticMessageDisplay.textContent = selectedMessage;
+            document.getElementById('result-image').innerHTML = selectedImage;
+            
+            // Animación especial para puntuaciones extremas
+            if (finalPercentage <= 30) {
+                // Animación triste para puntuaciones bajas
+                document.body.classList.add('shake');
+                setTimeout(() => {
+                    document.body.classList.remove('shake');
+                }, 500);
+            } else if (finalPercentage >= 90) {
+                // Animación festiva para puntuaciones altas
+                gameOverScreen.classList.add('celebrate');
+                
+                // Agregar confeti para celebrar
+                createConfetti();
+            }
+            
+            // Mostrar la pantalla de game over
+            gameOverScreen.style.display = 'flex';
+        }
+        
+        // Función para crear confeti
+        function createConfetti() {
+            const confettiCount = 50;
+            const colors = ['#f1c40f', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Propiedades aleatorias para cada pieza de confeti
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                const leftPos = Math.random() * 100;
+                const size = Math.random() * 8 + 5;
+                const animationDuration = Math.random() * 3 + 2;
+                const animationDelay = Math.random() * 2;
+                
+                confetti.style.backgroundColor = randomColor;
+                confetti.style.left = leftPos + '%';
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                confetti.style.animationDuration = animationDuration + 's';
+                confetti.style.animationDelay = animationDelay + 's';
+                
+                gameContainer.appendChild(confetti);
+                
+                // Eliminar el confeti después de la animación
+                setTimeout(() => {
+                    confetti.remove();
+                }, (animationDuration + animationDelay) * 1000);
+            }
+        }
+        
+        // Event listeners
+        startButton.addEventListener('click', startGame);
+        restartButton.addEventListener('click', restartGame);
+        
+        maleBtn.addEventListener('click', () => selectGender(false));
+        femaleBtn.addEventListener('click', () => selectGender(true));
+        
+        answerButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                checkAnswer(this);
+            });
+        });
+    </script>
 </body>
 </html>
