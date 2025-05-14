@@ -7,87 +7,272 @@
     <style>
         * {
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         body {
             margin: 0;
             padding: 20px;
             background-color: #f5f5f5;
             color: #333;
+            background-image: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
         }
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 3px solid #2c3e50;
+            min-height: 80vh;
+            position: relative;
         }
         h1 {
             color: #2c3e50;
             text-align: center;
             margin-bottom: 30px;
-            font-size: 24px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px;
+            border-radius: 5px;
         }
         h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
             padding-bottom: 10px;
             margin-top: 40px;
-            font-size: 20px;
-        }
-        .question {
-            margin-bottom: 25px;
-            padding: 15px;
-            background-color: #f9f9f9;
+            font-size: 22px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 10px;
             border-radius: 5px;
-            border-left: 4px solid #3498db;
         }
-        .question p {
+        .question-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .question-card {
+            position: absolute;
+            width: 100%;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 2px solid #3498db;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateX(100%);
+            top: 0;
+            left: 0;
+        }
+        .question-card.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 10;
+        }
+        .question-card.previous {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 5;
+        }
+        .question-card.next {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 5;
+        }
+        .question-text {
             font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 20px;
+            color: #2c3e50;
+            min-height: 80px;
         }
         .options {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            justify-content: space-between;
+            gap: 15px;
+            justify-content: center;
         }
         .option {
-            display: flex;
-            align-items: center;
+            position: relative;
+            flex: 1 1 180px;
+            min-width: 0;
         }
-        .option input {
-            margin-right: 5px;
+        .option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .option label {
+            display: block;
+            padding: 15px 10px;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #495057;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .option label:hover {
+            background: linear-gradient(to bottom, #e9ecef, #dee2e6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .option input[type="radio"]:checked + label {
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+            color: white;
+            border-color: #2980b9;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+            animation: pulse 0.5s;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
         .legend {
             background-color: #eaf2f8;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 10px;
             margin-bottom: 30px;
+            border: 2px solid #3498db;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         .legend ul {
             margin: 0;
             padding-left: 20px;
         }
         .legend li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
         .submit-btn {
-            background-color: #2c3e50;
+            background: linear-gradient(to bottom, #27ae60, #219653);
             color: white;
-            padding: 12px 20px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 4px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             display: block;
             margin: 40px auto 0;
-            width: 200px;
+            width: 250px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(33, 150, 83, 0.4);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         .submit-btn:hover {
-            background-color: #1a252f;
+            background: linear-gradient(to bottom, #219653, #1e8449);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(33, 150, 83, 0.6);
+        }
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            height: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        .progress-text {
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .prev-btn {
+            background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+            color: white;
+        }
+        .next-btn {
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+            color: white;
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .personal-info {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+        .required {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .section-title {
+            color: #2c3e50;
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 30px;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
         }
         @media (max-width: 768px) {
             .container {
@@ -95,10 +280,31 @@
             }
             .options {
                 flex-direction: column;
-                gap: 5px;
+                gap: 10px;
+            }
+            .option {
+                flex: 1 1 auto;
             }
             .submit-btn {
                 width: 100%;
+            }
+            .question-text {
+                font-size: 18px;
+            }
+        }
+        /* Efecto de confeti para el envío */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 5s linear forwards;
+            z-index: 1000;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
             }
         }
     </style>
@@ -119,571 +325,317 @@
             <p><em>Nota: Todas las preguntas son obligatorias.</em></p>
         </div>
         
-        <form action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
+        <form id="quizForm" action="https://formsubmit.co/aldemirperaltadel@gmail.com" method="POST">
             <!-- Campo oculto para evitar spam -->
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://formsubmit.co/thanks">
             <input type="hidden" name="_subject" value="Resultados Cuestionario - Medicina UNC 2025">
-                      <input type="hidden" name="_next" value="https://aldemir111.github.io/MEDICINA-PRIMERO/final.html">
+            <input type="hidden" name="_next" value="https://aldemir111.github.io/MEDICINA-PRIMERO/final.html">
             
-            <h2>Enfoque Profundo (Deep Approach)</h2>
-            
-            <div class="question">
-                <p>1. Trato de relacionar lo que estudio con lo que ya sé.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p1" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p1" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p1" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p1" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p1" value="5"> 5 - Totalmente de acuerdo</label>
+            <!-- Sección de información personal -->
+            <div class="personal-info">
+                <h2>Información Personal</h2>
+                
+                <div class="form-group">
+                    <label for="edad">Edad <span class="required">*</span></label>
+                    <input type="number" id="edad" name="edad" min="16" max="99" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="genero">Género <span class="required">*</span></label>
+                    <select id="genero" name="genero" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                        <option value="prefiero_no_decir">Prefiero no decir</option>
+                    </select>
                 </div>
             </div>
             
-            <div class="question">
-                <p>2. Busco entender las ideas principales en lugar de memorizar detalles.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p2" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p2" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p2" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p2" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p2" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
+            <!-- Barra de progreso -->
+            <div class="progress-text">Pregunta <span id="current-question">1</span> de 52</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
             </div>
             
-            <div class="question">
-                <p>3. Me esfuerzo por comprender completamente el material de estudio.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p3" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p3" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p3" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p3" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p3" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
+            <!-- Contenedor de preguntas -->
+            <div class="question-container" id="question-container">
+                <!-- Las preguntas se insertarán aquí dinámicamente -->
             </div>
             
-            <div class="question">
-                <p>4. Intento encontrar ejemplos que ilustren los conceptos.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p4" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p4" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p4" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p4" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p4" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
+            <!-- Botones de navegación -->
+            <div class="nav-buttons">
+                <button type="button" class="nav-btn prev-btn" id="prev-btn" disabled>Anterior</button>
+                <button type="button" class="nav-btn next-btn" id="next-btn">Siguiente</button>
             </div>
             
-            <div class="question">
-                <p>5. Me gusta pensar en cómo se relacionan las ideas entre sí.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p5" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p5" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p5" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p5" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p5" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>6. Intento comprender el significado detrás de los hechos.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p6" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p6" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p6" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p6" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p6" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>7. Me esfuerzo por entender el material, no solo aprenderlo de memoria.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p7" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p7" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p7" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p7" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p7" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>8. Prefiero estudiar temas que me interesan y me motivan.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p8" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p8" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p8" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p8" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p8" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>9. Me gusta discutir los temas para aclarar mis ideas.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p9" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p9" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p9" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p9" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p9" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>10. Intento aplicar lo que aprendo a situaciones reales.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p10" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p10" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p10" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p10" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p10" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>11. Busco evidencias para apoyar mis ideas.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p11" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p11" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p11" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p11" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p11" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>12. Me esfuerzo por entender los argumentos detrás de las ideas.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p12" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p12" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p12" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p12" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p12" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>13. Prefiero estudiar con interés y curiosidad genuina.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p13" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p13" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p13" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p13" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p13" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>14. Trato de integrar diferentes ideas para formar una visión coherente.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p14" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p14" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p14" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p14" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p14" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>15. Me esfuerzo en analizar críticamente la información.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p15" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p15" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p15" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p15" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p15" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>16. Me gusta aprender cosas nuevas que me desafían intelectualmente.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p16" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p16" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p16" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p16" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p16" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <h2>Enfoque Estratégico (Strategic Approach)</h2>
-            
-            <div class="question">
-                <p>17. Organizo mi tiempo para estudiar de forma eficiente.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p17" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p17" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p17" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p17" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p17" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>18. Preparo los exámenes con anticipación para obtener buenas calificaciones.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p18" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p18" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p18" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p18" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p18" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>19. Me concentro en los aspectos que sé que serán evaluados.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p19" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p19" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p19" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p19" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p19" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>20. Busco maneras de mejorar mi rendimiento académico.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p20" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p20" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p20" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p20" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p20" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>21. Estudio más cuando sé que hay exámenes importantes.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p21" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p21" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p21" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p21" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p21" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>22. Hago esquemas o resúmenes para organizar el material.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p22" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p22" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p22" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p22" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p22" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>23. Me esfuerzo por obtener las mejores calificaciones posibles.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p23" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p23" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p23" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p23" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p23" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>24. Planifico mis sesiones de estudio para cubrir todo el material.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p24" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p24" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p24" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p24" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p24" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>25. Uso técnicas de estudio que me han funcionado antes.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p25" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p25" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p25" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p25" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p25" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>26. Me esfuerzo en entender lo que se espera en los exámenes.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p26" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p26" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p26" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p26" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p26" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>27. Me fijo metas claras para mis estudios.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p27" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p27" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p27" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p27" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p27" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>28. Reviso el material varias veces para asegurarme de entenderlo.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p28" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p28" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p28" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p28" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p28" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>29. Me adapto a los requisitos del curso para maximizar mis resultados.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p29" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p29" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p29" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p29" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p29" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>30. Busco formas de estudiar que me ayuden a rendir mejor.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p30" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p30" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p30" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p30" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p30" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>31. Me esfuerzo por mantener un buen equilibrio entre estudio y descanso.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p31" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p31" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p31" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p31" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p31" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>32. Utilizo el tiempo libre para repasar y consolidar lo aprendido.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p32" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p32" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p32" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p32" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p32" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>33. Me preparo para los exámenes practicando con preguntas similares.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p33" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p33" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p33" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p33" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p33" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>34. Me esfuerzo por mantenerme motivado para estudiar.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p34" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p34" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p34" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p34" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p34" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>35. Ajusto mis métodos de estudio según los resultados que obtengo.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p35" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p35" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p35" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p35" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p35" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>36. Me esfuerzo por aprender de mis errores para mejorar.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p36" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p36" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p36" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p36" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p36" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <h2>Enfoque Superficial (Surface Approach)</h2>
-            
-            <div class="question">
-                <p>37. Estudio solo para pasar los exámenes.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p37" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p37" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p37" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p37" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p37" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>38. Memorizo hechos sin preocuparme por entenderlos.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p38" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p38" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p38" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p38" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p38" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>39. No me preocupo por entender el material, solo por aprender lo justo.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p39" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p39" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p39" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p39" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p39" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>41. A veces estudio sin prestar mucha atención.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p41" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p41" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p41" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p41" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p41" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>42. Me siento abrumado/a por la cantidad de material y solo intento memorizar lo básico.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p42" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p42" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p42" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p42" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p42" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>43. No me interesa mucho el tema, solo quiero aprobar.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p43" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p43" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p43" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p43" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p43" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>44. Me cuesta relacionar las ideas entre sí.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p44" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p44" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p44" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p44" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p44" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>45. Prefiero estudiar lo que es fácil para mí.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p45" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p45" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p45" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p45" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p45" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>46. A veces me salto partes del material que no entiendo bien.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p46" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p46" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p46" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p46" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p46" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>47. Estudio solo lo que creo que va a salir en el examen.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p47" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p47" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p47" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p47" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p47" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>49. A veces evito estudiar temas difíciles.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p49" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p49" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p49" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p49" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p49" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>50. No me esfuerzo por entender los conceptos complejos.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p50" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p50" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p50" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p50" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p50" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>51. Me siento presionado/a y estudio solo para evitar reprobar.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p51" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p51" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p51" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p51" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p51" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <div class="question">
-                <p>52. No me gusta estudiar, pero lo hago para pasar.</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="p52" value="1" required> 1 - Totalmente en desacuerdo</label>
-                    <label class="option"><input type="radio" name="p52" value="2"> 2 - En desacuerdo</label>
-                    <label class="option"><input type="radio" name="p52" value="3"> 3 - Neutral</label>
-                    <label class="option"><input type="radio" name="p52" value="4"> 4 - De acuerdo</label>
-                    <label class="option"><input type="radio" name="p52" value="5"> 5 - Totalmente de acuerdo</label>
-                </div>
-            </div>
-            
-            <button type="submit" class="submit-btn">Enviar Respuestas</button>
+            <!-- Botón de enviar (inicialmente oculto) -->
+            <button type="submit" class="submit-btn" id="submit-btn" style="display: none;">Enviar Respuestas</button>
         </form>
     </div>
+
+    <script>
+        // Todas las preguntas del cuestionario (completas hasta la 52)
+        const questions = [
+            { text: "1. Trato de relacionar lo que estudio con lo que ya sé.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "2. Busco entender las ideas principales en lugar de memorizar detalles.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "3. Me esfuerzo por comprender completamente el material de estudio.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "4. Intento encontrar ejemplos que ilustren los conceptos.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "5. Me gusta pensar en cómo se relacionan las ideas entre sí.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "6. Intento comprender el significado detrás de los hechos.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "7. Me esfuerzo por entender el material, no solo aprenderlo de memoria.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "8. Prefiero estudiar temas que me interesan y me motivan.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "9. Me gusta discutir los temas para aclarar mis ideas.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "10. Intento aplicar lo que aprendo a situaciones reales.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "11. Busco evidencias para apoyar mis ideas.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "12. Me esfuerzo por entender los argumentos detrás de las ideas.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "13. Prefiero estudiar con interés y curiosidad genuina.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "14. Trato de integrar diferentes ideas para formar una visión coherente.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "15. Me esfuerzo en analizar críticamente la información.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "16. Me gusta aprender cosas nuevas que me desafían intelectualmente.", section: "Enfoque Profundo (Deep Approach)" },
+            { text: "17. Organizo mi tiempo para estudiar de forma eficiente.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "18. Preparo los exámenes con anticipación para obtener buenas calificaciones.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "19. Me concentro en los aspectos que sé que serán evaluados.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "20. Busco maneras de mejorar mi rendimiento académico.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "21. Estudio más cuando sé que hay exámenes importantes.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "22. Hago esquemas o resúmenes para organizar el material.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "23. Me esfuerzo por obtener las mejores calificaciones posibles.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "24. Planifico mis sesiones de estudio para cubrir todo el material.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "25. Uso técnicas de estudio que me han funcionado antes.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "26. Me esfuerzo en entender lo que se espera en los exámenes.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "27. Me fijo metas claras para mis estudios.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "28. Reviso el material varias veces para asegurarme de entenderlo.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "29. Me adapto a los requisitos del curso para maximizar mis resultados.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "30. Busco formas de estudiar que me ayuden a rendir mejor.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "31. Me esfuerzo por mantener un buen equilibrio entre estudio y descanso.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "32. Utilizo el tiempo libre para repasar y consolidar lo aprendido.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "33. Me preparo para los exámenes practicando con preguntas similares.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "34. Me esfuerzo por mantenerme motivado para estudiar.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "35. Ajusto mis métodos de estudio según los resultados que obtengo.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "36. Me esfuerzo por aprender de mis errores para mejorar.", section: "Enfoque Estratégico (Strategic Approach)" },
+            { text: "37. Estudio solo para pasar los exámenes.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "38. Memorizo hechos sin preocuparme por entenderlos.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "39. No me preocupo por entender el material, solo por aprender lo justo.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "40. A veces estudio sin prestar mucha atención.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "41. Me siento abrumado/a por la cantidad de material y solo intento memorizar lo básico.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "42. No me interesa mucho el tema, solo quiero aprobar.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "43. Me cuesta relacionar las ideas entre sí.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "44. Prefiero estudiar lo que es fácil para mí.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "45. A veces me salto partes del material que no entiendo bien.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "46. Estudio solo lo que creo que va a salir en el examen.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "47. A veces evito estudiar temas difíciles.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "48. No me esfuerzo por entender los conceptos complejos.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "49. Me siento presionado/a y estudio solo para evitar reprobar.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "50. No me gusta estudiar, pero lo hago para pasar.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "51. Solo estudio cuando hay exámenes próximos.", section: "Enfoque Superficial (Surface Approach)" },
+            { text: "52. Me limito a memorizar sin intentar comprender.", section: "Enfoque Superficial (Surface Approach)" }
+        ];
+
+        // Variables de estado
+        let currentQuestionIndex = 0;
+        let answers = new Array(questions.length).fill(null);
+        let currentSection = questions[0].section;
+
+        // Elementos del DOM
+        const questionContainer = document.getElementById('question-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const currentQuestionDisplay = document.getElementById('current-question');
+        const progressBar = document.getElementById('progress-bar');
+
+        // Inicializar el cuestionario
+        function initQuiz() {
+            // Renderizar todas las preguntas al inicio pero ocultas
+            questions.forEach((question, index) => {
+                // Verificar si hay cambio de sección
+                if (index > 0 && questions[index].section !== questions[index - 1].section) {
+                    const sectionTitle = document.createElement('div');
+                    sectionTitle.className = 'section-title';
+                    sectionTitle.textContent = questions[index].section;
+                    questionContainer.appendChild(sectionTitle);
+                }
+
+                // Crear la tarjeta de pregunta
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.dataset.index = index;
+                
+                // Contenido de la pregunta
+                questionCard.innerHTML = `
+                    <div class="question-text">${questions[index].text}</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="p${index}-1" name="p${index + 1}" value="1" ${answers[index] === '1' ? 'checked' : ''}>
+                            <label for="p${index}-1">1 - Totalmente en desacuerdo</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="p${index}-2" name="p${index + 1}" value="2" ${answers[index] === '2' ? 'checked' : ''}>
+                            <label for="p${index}-2">2 - En desacuerdo</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="p${index}-3" name="p${index + 1}" value="3" ${answers[index] === '3' ? 'checked' : ''}>
+                            <label for="p${index}-3">3 - Neutral</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="p${index}-4" name="p${index + 1}" value="4" ${answers[index] === '4' ? 'checked' : ''}>
+                            <label for="p${index}-4">4 - De acuerdo</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="p${index}-5" name="p${index + 1}" value="5" ${answers[index] === '5' ? 'checked' : ''}>
+                            <label for="p${index}-5">5 - Totalmente de acuerdo</label>
+                        </div>
+                    </div>
+                `;
+
+                // Agregar eventos a los radio buttons
+                const radioButtons = questionCard.querySelectorAll('input[type="radio"]');
+                radioButtons.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        answers[index] = this.value;
+                        updateNavButtons();
+                    });
+                });
+
+                // Agregar la tarjeta al contenedor
+                questionContainer.appendChild(questionCard);
+            });
+            
+            // Mostrar solo la primera pregunta
+            document.querySelector('.question-card[data-index="0"]').classList.add('active');
+            
+            updateProgress();
+            updateNavButtons();
+        }
+
+        // Navegar a la pregunta anterior
+        function goToPrevQuestion() {
+            if (currentQuestionIndex > 0) {
+                const currentCard = document.querySelector(`.question-card[data-index="${currentQuestionIndex}"]`);
+                const prevCard = document.querySelector(`.question-card[data-index="${currentQuestionIndex - 1}"]`);
+                
+                currentCard.classList.remove('active');
+                currentCard.classList.add('next');
+                
+                prevCard.classList.remove('previous');
+                prevCard.classList.add('active');
+                
+                currentQuestionIndex--;
+                updateProgress();
+                updateNavButtons();
+                
+                // Ocultar botón de enviar si estaba visible
+                submitBtn.style.display = 'none';
+                nextBtn.style.display = 'block';
+            }
+        }
+
+        // Navegar a la siguiente pregunta
+        function goToNextQuestion() {
+            // Verificar si hay respuesta para la pregunta actual
+            if (answers[currentQuestionIndex] === null) {
+                alert('Por favor selecciona una respuesta antes de continuar.');
+                return;
+            }
+
+            // Si es la última pregunta, mostrar el botón de enviar
+            if (currentQuestionIndex === questions.length - 1) {
+                submitBtn.style.display = 'block';
+                nextBtn.style.display = 'none';
+                return;
+            }
+
+            const currentCard = document.querySelector(`.question-card[data-index="${currentQuestionIndex}"]`);
+            const nextCard = document.querySelector(`.question-card[data-index="${currentQuestionIndex + 1}"]`);
+            
+            currentCard.classList.remove('active');
+            currentCard.classList.add('previous');
+            
+            nextCard.classList.remove('next');
+            nextCard.classList.add('active');
+            
+            currentQuestionIndex++;
+            updateProgress();
+            updateNavButtons();
+        }
+
+        // Actualizar la barra de progreso
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentQuestionDisplay.textContent = currentQuestionIndex + 1;
+        }
+
+        // Actualizar el estado de los botones de navegación
+        function updateNavButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            
+            // Habilitar siguiente solo si hay respuesta seleccionada
+            const hasAnswer = answers[currentQuestionIndex] !== null;
+            nextBtn.disabled = !hasAnswer;
+        }
+
+        // Efecto de confeti al enviar el formulario
+        function createConfetti() {
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', 
+                          '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', 
+                          '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800'];
+            
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = (Math.random() * 10 + 5) + 'px';
+            confetti.style.height = confetti.style.width;
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.body.appendChild(confetti);
+            
+            // Eliminar el confeti después de la animación
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', goToPrevQuestion);
+        nextBtn.addEventListener('click', goToNextQuestion);
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            // Validar que todas las preguntas tengan respuesta
+            if (answers.includes(null)) {
+                e.preventDefault();
+                alert('Por favor responde todas las preguntas antes de enviar.');
+                return;
+            }
+            
+            // Validar información personal
+            const edad = document.getElementById('edad').value;
+            const genero = document.getElementById('genero').value;
+            
+            if (!edad || !genero) {
+                e.preventDefault();
+                alert('Por favor completa toda la información personal antes de enviar.');
+                return;
+            }
+            
+            // Crear confeti
+            for (let i = 0; i < 100; i++) {
+                setTimeout(createConfetti, i * 50);
+            }
+            
+            // Agregar las respuestas al formulario
+            answers.forEach((answer, index) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = `pregunta_${index + 1}`;
+                input.value = answer;
+                e.target.appendChild(input);
+            });
+        });
+
+        // Iniciar el cuestionario
+        initQuiz();
+    </script>
 </body>
 </html>
